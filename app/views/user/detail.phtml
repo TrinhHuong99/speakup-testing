@@ -2,7 +2,7 @@
     <div class="page-body">
         <!-- [ page content ] start -->
         <div class="row">
-            <div class="col-lg-10">
+            <div class="col-lg-10" style="margin-left: 10%">
                 <div class="card ca-details">
                     <div class="card-header font-text text-label-center  font-faauto">
                         <h4>Chi Tiết Thông Tin Nhân Viên <b style="color: chocolate"><i> <?= $users->fullname ?> </i></b> </h4>
@@ -71,9 +71,9 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="row">
-                                                <label class="col-sm-4 col-form-label text-label-right  font-text ">Phòng làm việc :</label>
+                                                <label class="col-sm-4 col-form-label text-label-right  font-text ">Thời gian tạo :</label>
                                                 <div class="col-sm-8">
-                                                	<label class="col-form-label"><?php echo $users->department ?></label>
+                                                	<label class="col-form-label"><?php echo $users->created_at ?></label>
                                                   
                                                     <span class="messages"></span>
                                                 </div>
@@ -85,10 +85,21 @@
                                             <div class="row">
                                                 <label class="col-sm-4 col-form-label text-label-right  font-text ">Quyền:</label>
                                                 <div class="col-sm-8">
-                                                   <label class="col-form-label"><?php echo $users->role  == 0 ? 'Nhân viên' : 'Admin' ?></label>
+                                                   <label class="col-form-label"><?php echo $users->role  == 1 ? 'Nhân viên' : 'Admin' ?></label>
                                                </div>
                                            </div>
                                        </div>
+                                       <div class="col-sm-6">
+                                        <div class="row">
+                                            <label class="col-sm-4 col-form-label text-label-right  font-text ">Thời gian cập nhật:</label>
+                                            <div class="col-sm-8">
+
+                                                <label class="col-form-label"><?php echo $users->updated_at ?></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                     <div class="form-group row">
                                        <div class="col-sm-6">
                                         <div class="row">
                                             <label class="col-sm-4 col-form-label text-label-right  font-text ">Chức vụ:</label>
@@ -101,8 +112,8 @@
                                 </div>
 
                             </div>
-                            <div>
-                                <a  style="float: right; width: 100px" href="<?php echo $this->url->get('user')?>" class ="btn btn-primary m-b-0 ">Đóng</a>
+                            <div class="mr30">
+                                <a  style="float: right; width: 100px" href="<?php echo $this->url->get('user')?>" class ="btn btn-primary m-b-0 mb20 ">Đóng</a>
                             </div>
                         </form>
                     </div>

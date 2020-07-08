@@ -309,9 +309,7 @@ class OrdersController extends \ControllerBase
     $books = Book::findFirst($book_id);
     $grou_id = $books->group_id;
     $group_ids = BookGroup::findFirst($grou_id);
-    // echo "<pre>";
-    // var_dump($books);
-    // exit();
+
     $this->view->setVars([
       'teachers' => $teachers,
       'orders'=> $orders,
@@ -347,24 +345,22 @@ class OrdersController extends \ControllerBase
             $number = $this->request->getPost('number');
 
             $books = Book::findFirst($book_id);
-            echo $price_book = $books->price;
-            // var_dump($books);
-            // echo $price_to = $book_id * $number; 
-        echo "string";
-        exit();
+            $price_book = $books->price;
+            $price_to = $price_book * $number;
+            $price_to = number_format($price_to);
+            echo $price_to .' '.'<strong>đ</strong>';
+        exit(); 
         }
   }
+    
     public function priceAction()
   {
        if ($this->request->isAjax() && $this->request->isPost()) {
             $book_id = $this->request->getPost('book_id');
-            $number = $this->request->getPost('number');
-
             $books = Book::findFirst($book_id);
-            echo $price_book = $books->price;
-            // var_dump($books);
-            // echo $price_to = $book_id * $number; 
-        echo "string";
+            $price_book = $books->price;
+            $price = number_format($price_book);
+            echo $price .' '.'<strong>đ</strong>';
         exit();
         }
   }

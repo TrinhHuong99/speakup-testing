@@ -37,7 +37,7 @@ class GroupbookController extends \ControllerBase
     public function beforeExecuteRoute($dispatcher)
     {
         $abc = $this->session->get('user');
-//        var_dump($abc['role']);exit();
+       // var_dump($abc['role']);exit();
         $role = $abc['role'];
         if ($role == '1') {
             $this->flashSession->error(

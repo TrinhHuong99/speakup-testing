@@ -28,6 +28,7 @@ class UserController extends \ControllerBase
         $this->assets->addCss('bower_components/select2/css/select2.min.css');
         $this->assets->addCss('bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css');
         $this->assets->addCss('bower_components/multiselect/css/multi-select.css');
+        $this->assets->addCss('assets/css/ukflex.css');
 
         //js
         $this->assets->addJs('assets/pages/form-validation/validate.js');
@@ -167,11 +168,23 @@ public function createAction()
                $users->department = $this->request->getPost('department');
                $users->created_by = $name;
                $success = $users->save();
+               // thêm tài khoản đồng thời thêm nhân viên
+                $teacher = new Teacher();
+                $name = $this->session->get('user_fullname');
+                $teacher->code = $this->request->getPost('username');
+                $teacher->fullname = $this->request->getPost('fullname');
+                $teacher->phone = $this->request->getPost('phone');
+                $teacher->email = $this->request->getPost('email');
+                $teacher->address = $this->request->getPost('address');
+                $teacher->facebook = $this->request->getPost('txtfacebook');
+                $teacher->youtube_chanel = $this->request->getPost('txtyoutube_chanel');
+                $teacher->created_by = $name;
+                $teacher->save();
 
                if($success)
                {
                 $this->flashSession->success('Thêm thành công');
-                $this->response->redirect('index');
+                $this->response->redirect('user');
             }
             else
             {
@@ -226,8 +239,6 @@ public function createAction()
          if($this->request->isPost())
             $password = $this->request->getPost('password');
         { 
-
-
             $users->username = $this->request->getPost('username');
             $users->fullname = $this->request->getPost('fullname');
             $users->email = $this->request->getPost('email');
@@ -274,9 +285,17 @@ public function createAction()
     public function deleteAction($id)
     {
         $users = Users::findFirst($id);
-         if($users->delete())
+        $teacher = Teacher::findFirst($id);
+         if($users->delete() || $teacher->delete())
          {
+            
             $this->flashSession->success('Xóa tài khoản thành công !');
+            $this->response->redirect('user');
+        }
+         else
+         {
+            
+            $this->flashSession->success('Xóa tài khoản không thành công !');
             $this->response->redirect('user');
         }
     }

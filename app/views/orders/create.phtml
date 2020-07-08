@@ -14,8 +14,8 @@
 		<div class="page-wrapper">
 			<div class="page-body">
 				<div class="row">
-					<div class="col-md-12">
-						<div class="card" id="book_price" data-action="/bookstore/orders/price"  data-action1="/bookstore/orders/totalprice" >
+					<div class="col-md-12 book_price" data-action="/bookstore-m/orders/price"  >
+						<div class="card" id="book_pricetotal" data-action="/bookstore-m/orders/totalprice" >
 							<div class="card-header text-label-center  text-createcommand  font-text font-faauto ">
 								<h4>Thêm Đơn Đặt Hàng</h4>
 								<p><?php $this->flashSession->output(); ?></p>
@@ -59,20 +59,13 @@
 										<div class="col-lg-1">
 											<input type="number" min="0" class="form-control number-book" placeholder="2" name="total_book" >
 										</div>
-										<div class="col-lg-2">
-											<label class="col-sm-5 col-form-label text-label-center font-text" >Giá: </label>
-											<div  class="col-sm-7 price-1">
-									
-											</div>
-										</div>
-										<div class="col-lg-2">
-											<label class="col-sm-7 col-form-label text-label-center font-text">Tổng:</label>
-											<div  class="col-sm-5 total-1">
-	
-											</div>
+										<div class="col-lg-4">
+											<label class="col-sm-3 col-form-label text-label-center font-text" >Giá: </label>
+											<label  class="col-sm-9 price-1 font-text">
+												
+											</label>
 										</div>
 										
-									</div>
 										<span class="messages"></span>
 									</div>
 									
@@ -112,13 +105,27 @@
 											<span class="messages"></span>
 										</div>
 									</div>
-
+									<div class="card-header">
+									</div>
+									<div class="card-block">
+										<div class="form-group row">
+											<div class="col-lg-12">
+												<label class="col-sm-4 col-form-label text-label-center font-text">Tổng giá trị đơn hàng:</label>
+												<label  class="col-sm-8 ">
+														<p class="total-1 font-text"></p>
+												</label>
+											</div>
+										</div>
+								
 									<div class="pb20">
 										<a  style="float: right; width: 100px" href="<?php echo $this->url->get('orders')?>" class ="btn btn-primary m-b-0 ">Đóng</a>
 										<input style="float: right; margin-right: 20px; width: 100px" type="submit" class="btn btn-danger" value="Thêm">
 									</div>
 
+									</div>
+									
 								</div>
+							</div>
 							</div>
 						</form>
 					</div>

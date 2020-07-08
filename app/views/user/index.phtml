@@ -149,7 +149,7 @@
                                                             <td><?php echo $value->fullname?></td>
                                                             <td><?php echo $value->phone?></td>
                                                             <td><?php echo $value->email?></td>
-                                                            <td><?php echo $value->role == '0' ? 'Nhân viên' : 'Admin'?></td>
+                                                            <td><?php echo $value->role == '0' ? 'Admin' : 'Nhân viên'?></td>
                                                             <td><?php echo date("d-m-Y H:m:i", strtotime($value->created_at));?></td>
                                                             <td>
                                                                 <a class="btn btn-primary icon-table" href="<?= $this->url->get('user/detail/'.$value->id)?> " title="">

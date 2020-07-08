@@ -64,7 +64,15 @@ class Book extends ModelBase
     /**
      * Initialize method for model.
      */
+     public $price;
 
+    /**
+     * Initialize method for model.
+ */ public $total_book;
+
+    /**
+     * Initialize method for model.
+     */
 
     public function validation()
     {
@@ -100,6 +108,22 @@ class Book extends ModelBase
             new presenceof(
                 [
                     'message' => 'Loại sách không được trống',
+                ]
+            )
+        );
+        $validator->add(
+            'price',
+            new presenceof(
+                [
+                    'message' => 'Giá sách không được trống',
+                ]
+            )
+        );
+        $validator->add(
+            'total_book',
+            new presenceof(
+                [
+                    'message' => 'Số lượng sách không được trống',
                 ]
             )
         );

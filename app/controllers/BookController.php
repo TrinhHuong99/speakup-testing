@@ -145,6 +145,10 @@ class BookController extends \ControllerBase
           $book->name = $name;
           $book->group_id = $this->request->getPost('group_id');
           $book->class_id = $this->request->getPost('class_id');
+          $book->price = $this->request->getPost('price');
+          $book->total_book = $this->request->getPost('total_book');
+          var_dump($book);
+          exit();
           if ($this->request->hasFiles() == true) 
           {
             $files = $this->request->getUploadedFiles();
@@ -237,6 +241,7 @@ class BookController extends \ControllerBase
         $book->name = $this->request->getPost('name');
         $book->group_id = $this->request->getPost('group_id');
         $book->class_id = $this->request->getPost('class_id');
+        $book->price = $this->request->getPost('price');
         if ($this->request->hasFiles() == true) 
         {
           $files = $this->request->getUploadedFiles();

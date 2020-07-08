@@ -517,8 +517,7 @@ $(document).ready(function() {
             // return false;
         }
     });
-
-        $("#create_book").validate({
+     $("#create_book").validate({
             onfocusout: function(e)
                 {  // this option is not needed
               this.element(e);       // this is the default behavior
@@ -532,16 +531,19 @@ $(document).ready(function() {
 
             name: {
               required: true,
+            },
+            price: {
+              required: true,
 
             },
-            // "teacher[]": {
-            //   required: true,
-            // },
+            total_book: {
+              required: true,
 
-           //  attachs: {
-           //   required: true,
-           //   extension: "docx"
-           // },
+            },
+            attachs: {
+             required: true,
+             extension: "docx"
+           },
         //    subjectemail: {
         //     required: "Tiêu đề email không được để trống"
         // },
@@ -553,18 +555,24 @@ $(document).ready(function() {
          },
          messages: {
           code: {
-           required: "Mã sách không được để trống",
-           min: "Mã Sách phải lớn hơn không",
-           maxlength: "Mã sách phải nhỏ hơn hoặc bằng 3 ký tự số",
+           required: "Mã đơn hàng không được để trống !",
+           min: "Mã đơn hàng phải lớn hơn không",
+           maxlength: "Mã đơn hàng phải nhỏ hơn hoặc bằng 3 ký tự số",
          },
 
          name: {
-           required: "Tên sách không được để trống",
+           required: "Tên sách không được để trống !",
          },
-         // attachs: {
-         //   required: "HDSD không được để trống",
-         //   extension: "Định dạng file phải .docx"
-         // },
+          price: {
+           required: "Tên sách không được để trống !",
+         },
+          total_book: {
+           required: "Số lượng không được để trống !",
+         },
+         attachs: {
+           required: "HDSD không được để trống",
+           extension: "Định dạng file phải .docx"
+         },
          // subjectemail: {
          //  required: "Tiêu đề email không được để trống"
          //          },
@@ -588,7 +596,7 @@ $(document).ready(function() {
                             form.submit();
                         } else {
                           $('#codevalidate').parent().find('label').remove()
-                            $('#codevalidate').parent().append('<label id="name-error" class="error" for="name">Mã sách đã tồn tại</label>')
+                            $('#codevalidate').parent().append('<label id="name-error" class="error" for="name">Mã hóa đơn đã tồn tại</label>')
                             $('#codevalidate').focus() //tự động trỏ chuột tới nếu mà xuất hiện lỗi
                         }
                     }
@@ -608,6 +616,90 @@ $(document).ready(function() {
             // return false;
         }
     });
+
+
+    //     $("#create_book").validate({
+    //         onfocusout: function(e)
+    //             {  // this option is not needed
+    //           this.element(e);       // this is the default behavior
+    //         },
+    //         rules: {
+    //          code: {
+    //           required: true,
+    //           min:true,
+    //           maxlength:3              
+    //         },
+
+    //         name: {
+    //           required: true,
+
+    //         },
+    //         attachs: {
+    //          required: true,
+    //          extension: "docx"
+    //        },
+    //         price: {
+    //           required: true,
+
+    //         },
+    //          total_book: {
+    //           required: true,
+
+    //         },
+    //      },
+    //      messages: {
+    //       code: {
+    //        required: "Mã sách không được để trống",
+    //        min: "Mã Sách phải lớn hơn không",
+    //        maxlength: "Mã sách phải nhỏ hơn hoặc bằng 3 ký tự số",
+    //      },
+
+    //      name: {
+    //        required: "Tên sách không được để trống",
+    //      },
+    //      price: {
+    //        required: "Giá sách không được để trống",
+    //      },
+    //      total_book: {
+    //        required: "Số lượng sách không được để trống",
+    //      },
+    //      attachs: {
+    //        required: "HDSD không được để trống",
+    //        extension: "Định dạng file phải .docx"
+    //      },
+    //    },
+    //    submitHandler: function(form) {
+          
+    //             let geturlvalidate = $('#codevalidate').attr('getdata');
+    //             let checkvalidate =  $('#codevalidate').val();
+    //             $.ajax({
+    //                 "type": "POST",
+    //                 "url": geturlvalidate,
+    //                 "data": {code: checkvalidate},
+    //                 "success": function (ret) {
+    //                     if (ret == 1) {
+    //                       $('#codevalidate').parent().find('label').remove();
+    //                         form.submit();
+    //                     } else {
+    //                       $('#codevalidate').parent().find('label').remove()
+    //                         $('#codevalidate').parent().append('<label id="name-error" class="error" for="name">Mã sách đã tồn tại</label>')
+    //                         $('#codevalidate').focus() //tự động trỏ chuột tới nếu mà xuất hiện lỗi
+    //                     }
+    //                 }
+    //             });
+    //     },
+    //  });
+    // CKEDITOR.replace( 'contenmail' );
+    // $("form").submit( function(e) {
+    //     var total_length = CKEDITOR.instances['contenmail'].getData().replace(/<[^>]*>/gi, '').length;
+    //     // if( !total_length ) {
+    //         $(".results").html('');
+    //         // $(".erroreditor").html('Nội dung email không được để trống' );
+
+    //         // e.preventDefault();
+    //         // return false;
+    //     // }
+    // });
 
         $("#edit_book").validate({
           onfocusout: function(e) 
@@ -630,9 +722,9 @@ $(document).ready(function() {
                 // "teacher[]": {
                 //     required: true,
                 // },
-               //  attachs: {
-               //      extension: "docx"
-               // },
+                attachs: {
+                    extension: "docx"
+               },
                 // subjectemail: {
                 //     required: true,
                 // },
@@ -888,27 +980,17 @@ $.fn.myFunction = function(getcode,getnumber,getdatabook, page){
 })
 }
 // lấy giá theo chọn sách của hóa đơn
-$(document).on('change', '.number-book', function(event) {
+$(document).on('change','.number-book', function(event) {
     var book_id = $('.book_name').val();
     var number = $(this).val();
-    var geturlgroup = $('#book_price').attr('data-action');
+    var geturlgroup = $('#book_pricetotal').attr('data-action');
      if (book_id !='') {
         $.ajax({
                   "type": "POST",
                   "url": geturlgroup,
                   "data": {book_id: book_id,number: number},
                   "success": function (res) {
-                    console.log(res);
-                        // $('.date-end').val(endval);
-                      // if (ret == 1) {
-                      //    $('#codevalidategroup').parent().find('label').remove()
-                      //     form.submit();
-                      //     // console.log(1)
-                      // } else {
-                      //    $('#codevalidategroup').parent().find('label').remove()
-                      //   $('#codevalidategroup').parent().append('<label id="name-error" class="error" for="name">Mã loại sách đã tồn tại</label>')
-                      //   $('#codevalidategroup').focus() //tự động trỏ chuột tới nếu mà xuất hiện lỗi
-                      // }
+                    $( ".total-1" ).html(res);
                   }
             });
       }else{
@@ -917,29 +999,18 @@ $(document).on('change', '.number-book', function(event) {
 });
 $(document).on('change', '.book_name', function(event) {
     var book_id = $('.book_name').val();
-    var number = $(this).val();
-    var geturlgroup = $('#book_price').attr('data-action1');
+    var geturlgroup = $('.book_price').attr('data-action');
      if (book_id !='') {
         $.ajax({
                   "type": "POST",
                   "url": geturlgroup,
-                  "data": {book_id: book_id,number: number},
+                  "data": {book_id: book_id},
                   "success": function (res) {
-                    console.log(res);
-                        // $('.date-end').val(endval);
-                      // if (ret == 1) {
-                      //    $('#codevalidategroup').parent().find('label').remove()
-                      //     form.submit();
-                      //     // console.log(1)
-                      // } else {
-                      //    $('#codevalidategroup').parent().find('label').remove()
-                      //   $('#codevalidategroup').parent().append('<label id="name-error" class="error" for="name">Mã loại sách đã tồn tại</label>')
-                      //   $('#codevalidategroup').focus() //tự động trỏ chuột tới nếu mà xuất hiện lỗi
-                      // }
+                    $( ".price-1" ).html(res);
                   }
             });
       }else{
-        alert('Hãy chọn sách trước khi chọn số lượng!');
+        alert('Hãy chọn đúng tên sách !');
       }
 });
 
