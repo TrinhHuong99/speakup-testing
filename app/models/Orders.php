@@ -68,6 +68,12 @@ class Orders extends ModelBase
     /**
      * Initialize method for model.
      */
+    /**/
+      public $note;
+
+    /**
+     * Initialize method for model.
+     */
     /**
      *
      * @var integer

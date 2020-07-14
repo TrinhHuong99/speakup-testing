@@ -91,7 +91,7 @@ $(document).ready(function() {
 
 
         //Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
-        $("#create_user").validate({
+      $("#create_user").validate({
           rules: {
            username: {
             required: true,
@@ -185,7 +185,7 @@ $(document).ready(function() {
         },
 
      });
-        $("#edit_user").validate({
+      $("#edit_user").validate({
          rules: {
            username: {
             required: true,
@@ -248,10 +248,10 @@ $(document).ready(function() {
        }
      });
 
-        $('#selectedtest').on('select', function(e) {
+      $('#selectedtest').on('select', function(e) {
           $(this).val('');
         });
-          $("#create_company").validate({
+      $("#create_company").validate({
             onfocusout: function(e)
                 {  // this option is not needed
               this.element(e);       // this is the default behavior
@@ -306,7 +306,7 @@ $(document).ready(function() {
             // })
         },
      });
-        $("#create_bills").validate({
+    $("#create_bills").validate({
             onfocusout: function(e)
                 {  // this option is not needed
               this.element(e);       // this is the default behavior
@@ -403,7 +403,49 @@ $(document).ready(function() {
             // return false;
         }
     });
-           
+        
+    $("#edit_order").validate({
+          onfocusout: function(e) 
+                {  // this option is not needed
+              this.element(e);       // this is the default behavior
+            },
+            rules: {
+             code: {
+              required: true,
+              maxlength:3,
+              textname:true,
+            },
+
+            title: {
+              required: true,
+
+            },
+    
+          },
+          messages: {
+            code: {
+             required: "Mã đơn đặt hàng không được để trống!",
+             maxlength: "Tối đa 3 ký tự!"
+           },
+
+           title: {
+             required: "Tiêu đề  không được để trống !",
+           },
+
+         },
+         });
+   CKEDITOR.replace( 'contenmail' );
+    $("form").submit( function(e) {
+        var total_length = CKEDITOR.instances['contenmail'].getData().replace(/<[^>]*>/gi, '').length;
+        if( !total_length ) {
+            $(".results").html('');
+            // $(".erroreditor").html('Nội dung email không được để trống' );
+
+            e.preventDefault();
+            // return false;
+        }
+    });
+
       $("#create_orders").validate({
             onfocusout: function(e)
                 {  // this option is not needed
@@ -549,6 +591,8 @@ $(document).ready(function() {
            },
          },
          });
+
+
 
         $("#groupbook").validate({
           onfocusout: function(e) 

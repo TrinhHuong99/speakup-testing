@@ -431,6 +431,7 @@ if ($('#canvas-4').length) {
 // Chart Hourly
 // Chart Product Chanel
     if ($('#hourly-canvas-1').length) {
+
         var ctx = $('#hourly-canvas-1');
         window.myBar = new Chart(ctx, {
             type: 'bar',
@@ -447,7 +448,7 @@ if ($('#canvas-4').length) {
                     label: 'Số lượng KH',
                     backgroundColor: 'rgb(255, 159, 64)',
                     yAxisID: 'y-axis-1',
-                    data: [220,840]
+                    data: [220,640]
                 }]
             },
             options: {
@@ -497,31 +498,39 @@ if ($('#canvas-4').length) {
             }
         });
     }
+    
     if ($('#hourly-canvas-2').length) {
         var ctx = $('#hourly-canvas-2');
+        var array_date = $('.array_date').html();
+        var data_value = $('.data_value').html();
+        var array_dateobj = JSON.parse(array_date);
+        var data_valueobj = JSON.parse(data_value);
+        console.log(data_value);
         window.myBar = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['3/25/2019', '3/26/2019','3/27/2019', '3/28/2019'],
+                labels: array_dateobj,
                 datasets: [{
                     type: 'line',
-                    label: 'Số lượng TT',
+                    label: 'Tổng tiền DT',
                     borderWidth: 2,
-                    borderColor: 'rgb(255, 205, 86)',
-                    backgroundColor: 'rgb(54, 162, 235)',
-                    yAxisID: 'y-axis-1',
-                    fill: false,
-                    data: [200,450,150,750]
-                }, {
-                    type: 'line',
-                    label: 'Số lượng KH',
-                    borderWidth: 2,
-                    borderColor: 'rgb(201, 203, 207)',
+                    borderColor: 'rgb(255, 159, 64)',
                     backgroundColor: 'rgb(255, 159, 64)',
                     yAxisID: 'y-axis-1',
                     fill: false,
-                    data: [120,240,310,840]
-                }]
+                    data: data_valueobj
+                },
+                //  {
+                //     type: 'line',
+                //     label: 'Tổng tiền DT',
+                //     borderWidth: 2,
+                //     borderColor: 'rgb(201, 203, 207)',rgb(255, 205, 86)
+                //     backgroundColor: 'rgb(255, 159, 64)',
+                //     yAxisID: 'y-axis-1',
+                //     fill: false,
+                //     data: [12000,24000,31000,840000,31000,84000,3010]
+                // }
+                ]
             },
             options: {
                 responsive: true,
@@ -560,8 +569,8 @@ if ($('#canvas-4').length) {
                         position: 'left',
                         id: 'y-axis-1',
                         ticks: {
-                            beginAtZero: true,
-                            suggestedMax: 900
+                            beginAtZero: true
+                     
                         }
                     }],
                 }

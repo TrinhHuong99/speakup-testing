@@ -45,18 +45,18 @@
                         <li class="user-profile header-notification">
                             <div class="dropdown-primary dropdown">
                                 <div class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="<?php echo $this->url->getStatic('/assets/images/avatar-4.jpg') ?>" class="img-radius" alt="User-Profile-Image">
-                                    <span> <?= $this->session->get('user_fullname') ?></span>
+                               <!--      <img src="<?php echo $this->url->getStatic('/assets/images/avatar-4.jpg') ?>" class="img-radius" alt="User-Profile-Image"> -->
+                                    <span> <?= $this->session->get('user_fullname') ?></span> 
                                     <i class="feather icon-chevron-down"></i>
                                 </div>
                                 <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                    <li>
+                                 <!--    <li>
                                         <a href="#!">
                                             <i class="feather icon-settings"></i> Settings
                                         </a>
-                                    </li>
+                                    </li> -->
                                     <li>
-                                        <a href="user-profile.html">
+                                        <a href="<?php echo $this->url->get('teacher/edit')?>">
                                             <i class="feather icon-user"></i> Profile
                                         </a>
                                     </li>
@@ -268,12 +268,12 @@
                         ?>
                         <ul class="pcoded-item pcoded-left-item">
                             <li class="<?php echo ($this->router->getControllerName() == '') ? 'active' : '' ?>">
-                                <a href="/bookstore" class="waves-effect waves-dark">
+                                <a href="/bookstore-m" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="feather icon-home"></i></span>
                                     <span class="pcoded-mtext">Dashboard</span>
                                 </a>
                             </li>
-                            <li class="pcoded-hasmenu <?php echo ($this->router->getControllerName() == 'teacher') ? 'active' : '' ?>">
+                            <!-- <li class="pcoded-hasmenu <?php echo ($this->router->getControllerName() == 'teacher') ? 'active' : '' ?>">
                                 <a href="javascript: void(0)" class="waves-effect waves-dark">
 									<span class="pcoded-micon">
                                         <i class="ion-ios-person"></i>
@@ -299,7 +299,33 @@
                                     </li>
                                    
                                 </ul>
+                            </li> -->
+                         
+                            <li class="<?php echo ($this->router->getControllerName() == 'teacher') ? 'active' : '' ?>">
+                                <a href="<?php echo $this->url->get('teacher/index')?>" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon">
+                                          <i class="ion-ios-people"></i>
+                                    </span>
+                                    <span class="pcoded-mtext">Nhân Viên</span>
+                                </a>
                             </li>
+                               <?php  $abc = $this->session->get('user');
+                                        $role = $abc['role'];
+                                        if ($role == '0') { 
+                                ?>
+                            <li class="<?php echo ($this->router->getControllerName() == 'user') ? 'active' : '' ?>">
+                                <a href="<?php echo $this->url->get('user/index')?>" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon">
+                                            <i class="ion-ios-person"></i>
+                                    </span>
+                                    <span class="pcoded-mtext">Quản Lý Tài Khoản</span>
+                                </a>
+                            </li>
+                                <?php  }?>
+                                  <?php  $abc = $this->session->get('user');
+                                        $role = $abc['role'];
+                                        if ($role == '0') { 
+                                ?>
                             <li class="pcoded-hasmenu <?php echo ($this->router->getControllerName() == 'book') ? 'active' : '' ?>">
                                 <a href="javascript: void(0)" class="waves-effect waves-dark">
 									<span class="pcoded-micon">
@@ -319,15 +345,28 @@
                                             <span class="pcoded-mtext">Danh Sách Sách </span>
                                         </a>
                                     </li>
-                                    <li class="<?php echo (($this->router->getActionName() == 'index' && $this->router->getControllername() == 'book') ? 'active':'') ?>">
+                                  <!--   <li class="<?php echo (($this->router->getActionName() == 'index' && $this->router->getControllername() == 'book') ? 'active':'') ?>">
                                         <a href="<?php echo $this->url->get('book/index') ?>" class="waves-effect waves-dark">
                                             <span class="pcoded-mtext">Sách bán chạy</span>
                                         </a>
-                                    </li>
+                                    </li> -->
                                    
                                 </ul>
                             </li>
-
+                            <?php }else { ?>
+                                <li class="<?php echo ($this->router->getControllerName() == 'book') ? 'active' : '' ?>">
+                                    <a href="<?php echo $this->url->get('book/index')?>" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon">
+                                            <i class="ion-ios-copy-outline"></i>
+                                        </span>
+                                        <span class="pcoded-mtext">Danh Sách Sách </span>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                            <?php  $abc = $this->session->get('user');
+                                        $role = $abc['role'];
+                                        if ($role == '0') { 
+                                ?>
                             <li class="pcoded-hasmenu <?php echo (($this->router->getControllername() == 'groupbook') ? 'active pcoded-trigger':'') ?>">
                                 <a href="javascript: void(0)" class="waves-effect waves-dark">
                                     <span class="pcoded-micon">
@@ -337,52 +376,25 @@
                                 </a>
                                 <ul class="pcoded-submenu">
 
-                                    <li class="<?php echo (($this->router->getActionName() == 'index' && $this->router->getControllername() == 'contact') ? 'active':'') ?>">
-                                        <a href="<?php echo $this->url->get('contact/index') ?>" class="waves-effect waves-dark">
-                                            <span class="pcoded-mtext"> Báo Cáo Theo Ngày</span>
+                                    <li class="<?php echo (($this->router->getActionName() == 'index' && $this->router->getControllername() == 'reports') ? 'active':'') ?>">
+                                        <a href="<?php echo $this->url->get('reports/report_books') ?>" class="waves-effect waves-dark">
+                                            <span class="pcoded-mtext"> Báo cáo thông kê sách</span>
                                         </a>
                                     </li>
-                                    <li class="<?php echo (($this->router->getActionName() == 'index' && $this->router->getControllername() == 'contact') ? 'active':'') ?>">
-                                        <a href="<?php echo $this->url->get('contact/index') ?>" class="waves-effect waves-dark">
-                                            <span class="pcoded-mtext">Báo Cáo Số Lượng</span>
+                                    <li class="<?php echo (($this->router->getActionName() == 'index' && $this->router->getControllername() == 'reports') ? 'active':'') ?>">
+                                        <a href="<?php echo $this->url->get('reports/report_bills') ?>" class="waves-effect waves-dark">
+                                            <span class="pcoded-mtext">Báo cáo doanh thu</span>
                                         </a>
                                     </li>
-                                    <li class="<?php echo (($this->router->getActionName() == 'create' && $this->router->getControllername() == 'contact') ? 'active':'') ?>">
-                                        <a href="<?php echo $this->url->get('contact/create') ?>" class="waves-effect waves-dark">
-                                            <span class="pcoded-mtext">Báo Cáo Tổng Hợp</span>
-                                        </a>
-                                    </li>
-                                   
-                                </ul>
-                            </li>
-
-                            <li class=" pcoded-hasmenu <?php echo ($this->router->getControllerName() == 'user') ? 'active' : '' ?>">
-                                <a href="javascript: void(0)" class="waves-effect waves-dark" id="<?php echo $this->url->get('user')?>">
-									<span class="pcoded-micon">
-										<i class="ion-ios-people"></i>
-									</span>
-                                    <span class="pcoded-mtext">Quản Lý Tài Khoản</span>
-                                </a>
-                                <ul class="pcoded-submenu">
-
-                                    <li class="<?php echo (($this->router->getActionName() == 'index' && $this->router->getControllername() == 'contact') ? 'active':'') ?>">
-                                        <a href="<?php echo $this->url->get('contact/index') ?>" class="waves-effect waves-dark">
-                                            <span class="pcoded-mtext"> Loại Sách </span>
-                                        </a>
-                                    </li>
-                                    <li class="<?php echo (($this->router->getActionName() == 'index' && $this->router->getControllername() == 'user') ? 'active':'') ?>">
-                                        <a href="<?php echo $this->url->get('user/index') ?>" class="waves-effect waves-dark">
-                                            <span class="pcoded-mtext">Danh Sách Tài Khoản </span>
-                                        </a>
-                                    </li>
-                                    <li class="<?php echo (($this->router->getActionName() == 'create' && $this->router->getControllername() == 'contact') ? 'active':'') ?>">
-                                        <a href="<?php echo $this->url->get('contact/create') ?>" class="waves-effect waves-dark">
-                                            <span class="pcoded-mtext">Sách bán chạy</span>
+                                    <li class="<?php echo (($this->router->getActionName() == 'create' && $this->router->getControllername() == 'reports') ? 'active':'') ?>">
+                                        <a href="<?php echo $this->url->get('reports/report_employee') ?>" class="waves-effect waves-dark">
+                                            <span class="pcoded-mtext">Báo cáo theo nhân viên</span>
                                         </a>
                                     </li>
                                    
                                 </ul>
                             </li>
+                              <?php  }?>
                             <li class="pcoded-hasmenu <?php echo (($this->router->getControllername() == 'contact') ? 'active pcoded-trigger':'') ?>">
                                 <a href="javascript: void(0)" class="waves-effect waves-dark">
                                     <span class="pcoded-micon">

@@ -36,7 +36,13 @@
 									<div class="row">
 										<label class="col-sm-4 col-form-label text-label-left font-text">Tên sách:</label>
 										<div class="col-sm-8">
-											<label class="col-form-label"><?=$books->name?></label>
+											<label class="col-form-label">
+												<?php foreach ($book_name as $key => $value) {
+													echo '<p class="font-text">'.($key+1) .'. '. $value.'</p>';
+												}
+												?>
+
+											</label>
 										</div>
 									</div>
 								</div>
@@ -46,7 +52,7 @@
 										<div class="col-sm-7">
 											 <label class="col-form-label">
 												<?php if($bills->price){ ?>
-													<?= $bills->price?><strong>đ</strong>
+													<?=number_format($bills->price)?><strong>đ</strong>
 												<?php } ?>
 											</label> 
 										</div>
@@ -104,14 +110,14 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-sm-6">
+								<!-- <div class="col-sm-6">
 									<div class="row">
 										<label class="col-sm-5 col-form-label text-label-left font-text">Thời gian cập nhật:</label>
 										<div class="col-sm-7">
 											<label class="col-form-label"> <?=$bills->updated_at?></label>
 										</div>
 									</div>
-								</div>
+								</div> -->
 							</div>
 							<div class="form-group col-sm-12 " >
 									<a  style="float: right" href="<?php echo $this->url->get('orders')?>" class ="text-label-right  btn btn-primary m-b-0 ">Đóng</a>

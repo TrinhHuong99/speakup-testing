@@ -86,9 +86,9 @@
 									<div class="row">
 										<label class="col-sm-5 col-form-label text-label-left font-text">Giá:</label>
 										<div class="col-sm-7">
-											<label class="col-form-label"> 
+											<label class="col-form-label font-text"> 
 												<?php if($orders->price){ ?>
-													<?= $orders->price?><strong>đ</strong>
+													<?=number_format($orders->price)?><strong>  đ</strong>
 												<?php } ?>
 											</label>
 										</div>
@@ -138,9 +138,9 @@
 									<div class="row">
 										<label class="col-sm-4 col-form-label text-label-right font-text">Tổng giá đơn hàng:</label>
 										<div class="col-sm-8">
-											<label class="col-form-label">
+											<label class="col-form-label font-text">
 												<?php if($orders->total_price){ ?>
-													<?= $orders->total_price?><strong>đ</strong>
+													<?=number_format($orders->total_price)?><strong>đ</strong>
 												<?php } ?>
 											</label>
 										</div>

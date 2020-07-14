@@ -60,8 +60,8 @@
 											<input type="number" min="0" class="form-control number-book" placeholder="2" name="total_book" >
 										</div>
 										<div class="col-lg-4">
-											<label class="col-sm-3 col-form-label text-label-center font-text" >Giá: </label>
-											<label  class="col-sm-9 price-1 font-text">
+											<label class="col-sm-3 col-form-label text-label-center font-text" for="price">Giá: </label>
+											<label name="price"  class="col-sm-9 price-1 font-text">
 												
 											</label>
 										</div>
@@ -110,16 +110,16 @@
 									<div class="card-block">
 										<div class="form-group row">
 											<div class="col-lg-12">
-												<label class="col-sm-4 col-form-label text-label-center font-text">Tổng giá trị đơn hàng:</label>
-												<label  class="col-sm-8 ">
-														<p class="total-1 font-text"></p>
+												<label class="col-sm-4 col-form-label text-label-center font-text" for="total_price">Tổng giá trị đơn hàng:</label>
+												<label name="total_price"  class="col-sm-8 total-1 font-text">
+														
 												</label>
 											</div>
 										</div>
 								
 									<div class="pb20">
 										<a  style="float: right; width: 100px" href="<?php echo $this->url->get('orders')?>" class ="btn btn-primary m-b-0 ">Đóng</a>
-										<input style="float: right; margin-right: 20px; width: 100px" type="submit" class="btn btn-danger" value="Thêm">
+										<input id="add-orders" style="float: right; margin-right: 20px; width: 100px" type="submit" class="btn btn-danger" value="Thêm">
 									</div>
 
 									</div>

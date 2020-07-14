@@ -247,66 +247,10 @@ $(document).ready(function() {
 
        }
      });
-
         $('#selectedtest').on('select', function(e) {
           $(this).val('');
         });
-          $("#create_company").validate({
-            onfocusout: function(e)
-                {  // this option is not needed
-              this.element(e);       // this is the default behavior
-            }, 
-             rules: {
-            address: {
-              required: true,
-
-            },
-            linkweb: {
-              required: true,
-
-            },
-            company_name: {
-              required: true,
-
-            },
-
-         },
-        messages: {
-         address: {
-           required: "Địa chỉ không được để trống !",
-         },
-         linkweb: {
-           required: "Link web không được để trống !",
-         },
-         company_name: {
-           required: "Tên công ty không được để trống !",
-         },
-
-       },
-       submitHandler: function(form) {
-          
-                let geturlvalidate = $('#codevalidate').attr('getdata');
-                let checkvalidate =  $('#codevalidate').val();
-                $.ajax({
-                    "type": "POST",
-                    "url": geturlvalidate,
-                    "data": {code: checkvalidate},
-                    "success": function (ret) {
-                        if (ret == 1) {
-                          $('#codevalidate').parent().find('label').remove();
-                            form.submit();
-                        } else {
-                          $('#codevalidate').parent().find('label').remove()
-                            $('#codevalidate').parent().append('<label id="name-error" class="error" for="name">Mã hóa đơn đã tồn tại</label>')
-                            $('#codevalidate').focus() //tự động trỏ chuột tới nếu mà xuất hiện lỗi
-                        }
-                    }
-                });
-                // return false;
-            // })
-        },
-     });
-        $("#create_bills").validate({
+     $("#create_book").validate({
             onfocusout: function(e)
                 {  // this option is not needed
               this.element(e);       // this is the default behavior
@@ -318,108 +262,10 @@ $(document).ready(function() {
               maxlength:3              
             },
 
-            name_customer: {
-              required: true,
-
-            },
-            book_name: {
-              required: true,
-
-            },
-           //  "teacher[]": {
-           //    required: true,
-           //  },
-
-           //  attachs: {
-           //   required: true,
-           //   extension: "docx"
-           // },
-        //    subjectemail: {
-        //     required: "Tiêu đề email không được để trống"
-        // },
-
-        // contenmail: {
-        //     required: "Nội dung email không được để trống"
-        // },
-
-         },
-         messages: {
-          code: {
-           required: "Mã hóa đơn không được để trống !",
-           min: "Mã hóa đơn phải lớn hơn không",
-           maxlength: "Mã hóa đơn phải nhỏ hơn hoặc bằng 3 ký tự số",
-         },
-
-         name_customer: {
-           required: "Tên khách hàng không được để trống !",
-         },
-         book_name: {
-           required: "Tên sách không được để trống !",
-         },
-         // attachs: {
-         //   required: "HDSD không được để trống",
-         //   extension: "Định dạng file phải .docx"
-         // },
-         // subjectemail: {
-         //  required: "Tiêu đề email không được để trống"
-         //          },
-
-      // contenmail: {
-      //     required: "Nội dung email không được để trống"
-      //     },
-
-       },
-       submitHandler: function(form) {
-          
-                let geturlvalidate = $('#codevalidate').attr('getdata');
-                let checkvalidate =  $('#codevalidate').val();
-                $.ajax({
-                    "type": "POST",
-                    "url": geturlvalidate,
-                    "data": {code: checkvalidate},
-                    "success": function (ret) {
-                        if (ret == 1) {
-                          $('#codevalidate').parent().find('label').remove();
-                            form.submit();
-                        } else {
-                          $('#codevalidate').parent().find('label').remove()
-                            $('#codevalidate').parent().append('<label id="name-error" class="error" for="name">Mã hóa đơn đã tồn tại</label>')
-                            $('#codevalidate').focus() //tự động trỏ chuột tới nếu mà xuất hiện lỗi
-                        }
-                    }
-                });
-                // return false;
-            // })
-        },
-     });
-    CKEDITOR.replace( 'contenmail' );
-    $("form").submit( function(e) {
-        var total_length = CKEDITOR.instances['contenmail'].getData().replace(/<[^>]*>/gi, '').length;
-        if( !total_length ) {
-            $(".results").html('');
-            // $(".erroreditor").html('Nội dung email không được để trống' );
-
-            e.preventDefault();
-            // return false;
-        }
-    });
-           
-      $("#create_orders").validate({
-            onfocusout: function(e)
-                {  // this option is not needed
-              this.element(e);       // this is the default behavior
-            },
-            rules: {
-             code: {
-              required: true,
-              min:true,
-              maxlength:3              
-            },
-
-            title: {
+            name: {
               required: true,
             },
-            book_name: {
+            price: {
               required: true,
 
             },
@@ -427,18 +273,14 @@ $(document).ready(function() {
               required: true,
 
             },
-            company_name: {
+             group_id: {
               required: true,
 
             },
-            status: {
-              required: true,
-
-            },
-           //  attachs: {
-           //   required: true,
-           //   extension: "docx"
-           // },
+            attachs: {
+             // required: true,
+             extension: "docx"
+           },
         //    subjectemail: {
         //     required: "Tiêu đề email không được để trống"
         // },
@@ -455,26 +297,22 @@ $(document).ready(function() {
            maxlength: "Mã đơn hàng phải nhỏ hơn hoặc bằng 3 ký tự số",
          },
 
-         title: {
-           required: "Tiêu đề không được để trống !",
+         name: {
+           required: "Tên sách không được để trống !",
          },
-          book_name: {
+          price: {
            required: "Tên sách không được để trống !",
          },
           total_book: {
            required: "Số lượng không được để trống !",
          },
-          company_name: {
-           required: "Tên công ty không được để trống !",
+         group_id: {
+           required: "Thể loại sách không được để trống !",
          },
-          status: {
-           required: "Trạng thái không được để trống !",
+         attachs: {
+           // required: "HDSD không được để trống",
+           extension: "Định dạng file phải .docx"
          },
-
-         // attachs: {
-         //   required: "HDSD không được để trống",
-         //   extension: "Định dạng file phải .docx"
-         // },
          // subjectemail: {
          //  required: "Tiêu đề email không được để trống"
          //          },
@@ -519,7 +357,79 @@ $(document).ready(function() {
         }
     });
 
+    $("#edit_book").validate({
+          onfocusout: function(e) 
+                {  // this option is not needed
+              this.element(e);       // this is the default behavior
+            },
+                      rules: {
+                         code: {
+                          required: true,
+                          min:true,
+                          maxlength:3              
+                        },
 
+                        name: {
+                          required: true,
+                        },
+                        price: {
+                          required: true,
+
+                        },
+                        total_book: {
+                          required: true,
+
+                        },
+                         group_id: {
+                          required: true,
+
+                        },
+                        attachs: {
+                         // required: true,
+                         extension: "docx"
+                       },
+                    //    subjectemail: {
+                    //     required: "Tiêu đề email không được để trống"
+                    // },
+
+                    // contenmail: {
+                    //     required: "Nội dung email không được để trống"
+                    // },
+
+                     },
+                     messages: {
+                      code: {
+                       required: "Mã đơn hàng không được để trống !",
+                       min: "Mã đơn hàng phải lớn hơn không",
+                       maxlength: "Mã đơn hàng phải nhỏ hơn hoặc bằng 3 ký tự số",
+                     },
+
+                     name: {
+                       required: "Tên sách không được để trống !",
+                     },
+                      price: {
+                       required: "Giá sách không được để trống !",
+                     },
+                     group_id: {
+                       required: "Thể loại sách không được để trống !",
+                     },
+                      total_book: {
+                       required: "Số lượng không được để trống !",
+                     },
+                     attachs: {
+                       // required: "HDSD không được để trống",
+                       extension: "Định dạng file phải .docx"
+                     },
+                     // subjectemail: {
+                     //  required: "Tiêu đề email không được để trống"
+                     //          },
+
+                  // contenmail: {
+                  //     required: "Nội dung email không được để trống"
+                  //     },
+
+                   },
+           });
         $("#editgroupbook").validate({
           onfocusout: function(e) 
                 {  // this option is not needed
@@ -549,6 +459,8 @@ $(document).ready(function() {
            },
          },
          });
+
+
 
         $("#groupbook").validate({
           onfocusout: function(e) 

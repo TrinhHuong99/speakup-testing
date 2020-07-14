@@ -75,7 +75,7 @@
     }
     .ahihi{
         height:270px;
-        width:100%;
+        width:900px;
         /*border:1px solid black;*/
         overflow:auto;
     }
@@ -86,7 +86,7 @@
         <div class="row align-items-center">
             <div class="col-md-8">
                 <div class="page-header-title">
-                    <h4 class="m-b-10">Quản lý nhân viên</h4>
+                    <h4 class="m-b-10">Nhân Viên</h4>
                 </div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item">
@@ -95,7 +95,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="#!">Quản lý nhân viên</a>
+                        <a href="#!">Nhân Viên</a>
                     </li>
                 </ul>
             </div>
@@ -113,7 +113,7 @@
             <div class="col-lg-12 col-md-12">
                 <div class="card">
                     <div class="card-header font-text font-faauto">
-                        <h2>Quản Lý Nhân Viên</h2>
+                        <h2> Nhân Viên</h2>
                         <p style=""><?php $this->flashSession->output(); ?></p>
                     </div>
                      <div class="card-block ">
@@ -184,7 +184,7 @@
                                         <th>SĐT</th>
                                         <th>Email</th>
                                         <th>Địa chỉ</th>
-                                        <th>Ngày tạo</th>
+                                        <!-- <th>Ngày tạo</th> -->
                                         <th>Tùy chọn</th>
                                     </tr>
                                 </thead>
@@ -199,8 +199,8 @@
                                             <td><p style="font-size: 14px"><?php echo $value->phone ?></p></td>
                                             <td><p style="font-size: 14px"><?php echo $value->email ?></p></td>
                                             <td><p><?php echo $value->address ?></p></td>
-                                            <td><?php echo
-                                                date_format( new DateTime($value->created_at), 'd/m/Y' ) ?></td>
+                                      <!--       <td><?php echo
+                                                date_format( new DateTime($value->created_at), 'd/m/Y' ) ?></td> -->
                                             <td>
                                                 <div class="row">
                                                 <ul style="margin-left: 20px;margin-right: 5px;">
@@ -212,16 +212,16 @@
                                                     </li> -->
                                                 </ul>
                                                 <ul>
-                                                <a href="<?php echo $this->url->get('teacher/edit/'. $value->id) ?>" class="btn btn-warning btn-sm">
+                                          <!--       <a href="<?php echo $this->url->get('teacher/edit/'. $value->id) ?>" class="btn btn-warning btn-sm">
                                                     <i class="ion-ios-compose" style="font-size: 19px;"></i>
-                                                </a>
+                                                </a> -->
                                                 <a id="lknn" class="btn btn-primary btn-sm icon-table"data-toggle="modal" data-target="#<?php echo $value->id ?>"
                                                    geturlbook="<?php echo $this->url->get('teacher/bookTeacher/' . $value->id)?>" data-book="<?php echo $value->id?>" title="">
                                                     <i class="ion-navicon-round" style="font-size: 19px;"></i>
                                                 </a>
-                                                <a hidden class="btn btn-danger btn-sm"  href="teacher/delete/<?php echo $value->id ?>"
+                                                <!-- <a hidden class="btn btn-danger btn-sm"  href="teacher/delete/<?php echo $value->id ?>"
                                                    onclick="return confirm('Are you sure?')"><i class="ion-ios-trash" style="font-size: 19px;"></i>
-                                                </a>
+                                                </a> -->
                                                 <a hidden id="xoamodel" href="" class="btn btn-danger btn-sm" data-href="teacher/deleteModel/<?php echo $value->id ?>" data-toggle="modal"
                                                    data-target="#confirm-delete"><i class="ion-ios-trash" style="font-size: 19px;"></i></a>
 
@@ -303,18 +303,21 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <h5 class="font-text " style="margin-left: 15px; margin-top: 15px">Sách đã thêm</h5>
+                                            <div class="row " >
+                                                <h5 class="font-text " style="margin-left: 30%; margin-top: 15px;color: chocolate">Sách đã bán được trong ngày : </h5>
                                                 <div class="ahihi">
                                                     <table id="simpletable" class="hai table table-striped table-bordered nowrap style-1" style="width: 95%; margin: 20px;">
                                                     <thead style="background: #f0f1f2">
                                                         <tr>
-                                                            <th style="width: 10%">STT</th>
-                                                            <th style="width: 80%">Tên sách</th>
+                                                            <th style="width: 5%">STT</th>
+                                                            <th style="width: 10%">Mã hóa đơn</th>
+                                                            <th style="width: 15%">Tổng hóa đơn</th>
+                                                            <th style="width: 70%">Tên sách</th>
                                                             <!-- <th>Lớp</th> -->
                                                         </tr>
                                                     </thead>
                                                     <tbody id="listitembook">
+                                                
                                                         <!-- content viết file js hai.js -->
                                                     </tbody>
                                                 </table>

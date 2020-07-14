@@ -43,8 +43,8 @@ class OrdersController extends \ControllerBase
     $this->assets->addJs('bower_components/multiselect/js/jquery.multi-select.js');
     $this->assets->addJs('assets/pages/advance-elements/select2-custom.js');
     $this->assets->addJs('assets/pages/form-validation/validate.js');
-    $this->assets->addJs('js/myjs.js');
     $this->assets->addJs('js/datepicker.js');
+     $this->assets->addJs('assets/js/update.js');
 
 
         //them css hoac js ma xu ly rieng (do minh viet hoac tu thu vien) cho tung trang vao day (neu can thiet)
@@ -137,6 +137,7 @@ class OrdersController extends \ControllerBase
       {
 //          $this->assets->addJs('assets/pages/ckeditor/ckeditor.js');
 //          $this->assets->addJs('assets/pages/ckeditor/ckeditor-custom.js');
+        $this->assets->addJs('js/myjs.js');
         $this->assets->addJs('//cdn.ckeditor.com/4.5.9/standard/ckeditor.js');
         $teachers = Teacher::find(['conditions' => 'publish = :status:', 'bind'=>['status' =>1]]);
 
@@ -156,7 +157,7 @@ class OrdersController extends \ControllerBase
         $status  = $this->request->getPost('status');
         $contenmail  = $this->request->getPost('contenmail');
         $created_bys = $this->session->get('user_fullname');
-
+      
         $now = date('Y-m-d H:i:s', time());
         $time_now = date_create_from_format('Y-m-d H:i:s', $now)->format('Y-m-d H:i:s');
 
@@ -166,13 +167,30 @@ class OrdersController extends \ControllerBase
         $orders->company_code = $company_name;
         $orders->total_book = $total_book;
         $orders->note  = $contenmail;
-        $orders->book_id = $book_name;
+        // từ book_id lấy ra được giá và tính tổng giá
+        if($book_name) {
+          $books = Book::findFirst($book_name);
+          $price = $books->price;
+          // nếu là trạng thái Đã nhận hàng có id =2 thì thêm vào số lượng ở Boo
+          if($status == '2' ){
+              $number_books = $books->total_book;
+              $update_numbook = $number_books + $total_book;  
+              $books->total_book    = $update_numbook;
+              $success = $books->update();    
+          }
+          // tính giá tổng đơn hàng
+          $total_price = $price * $total_book;
+          $orders->book_id = $book_name;
+          $orders->price = $price;
+          $orders->total_price = $total_price;
+        }
         $orders->created_by = $created_bys;
         $orders->created_at = $time_now;
         $orders->updated_at = $time_now;
-        // echo "<pre>";
-        // var_dump($orders);
-        // exit(); 
+        $orders->price = $price;
+        $orders->total_price = $total_price;
+
+      
          $success = $orders->save();
 
         if($success)
@@ -219,8 +237,10 @@ class OrdersController extends \ControllerBase
 
     public function editAction($id)
     {
-        $this->assets->addJs('assets/pages/ckeditor/ckeditor.js');
-        $this->assets->addJs('assets/pages/ckeditor/ckeditor-custom.js');
+      // $this->assets->addJs('assets/pages/ckeditor/ckeditor.js');
+      // $this->assets->addJs('assets/pages/ckeditor/ckeditor-custom.js');
+      $this->assets->addJs('js/edit.js');
+      $this->assets->addJs('//cdn.ckeditor.com/4.5.9/standard/ckeditor.js');
       $teachers = Teacher::find(['conditions' => 'publish = :status:', 'bind'=>['status' =>1]]);
       $teachers = Teacher::find();
       $status_name = Status::find();
@@ -259,11 +279,24 @@ class OrdersController extends \ControllerBase
         $created_bys = $this->request->getPost('created_by');
         $orders->code = $this->request->getPost('code');
         $orders->title = $this->request->getPost('title');
-        $orders->status_id = $this->request->getPost('status');
+        $status = $this->request->getPost('status');
         $orders->note = $this->request->getPost('contenmail');
 
         $now = date('Y-m-d H:i:s', time());
         $time_now = date_create_from_format('Y-m-d H:i:s', $now)->format('Y-m-d H:i:s');
+        $orders->status_id = $status;
+
+        $book_id = $orders->book_id;
+
+        $total_book = $orders->total_book;
+        $books = Book::findFirst($book_id);
+
+        if($status == '2' ){
+              $number_books = $books->total_book;
+              $update_numbook = $number_books + $total_book;  
+              $books->total_book  = $update_numbook;
+              $success = $books->update();    
+        }
 
         $orders->created_by = $created_bys;
         $orders->updated_at = $time_now;
@@ -272,7 +305,7 @@ class OrdersController extends \ControllerBase
 
           if($success)
           {
-            $this->flashSession->success('Chỉnh sửa đơn hàng thành công');
+            $this->flashSession->success('Chỉnh sửa đơn hàng thành công ');
             $this->response->redirect('orders');
           }
           else

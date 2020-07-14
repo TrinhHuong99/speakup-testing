@@ -29,7 +29,6 @@ class TeacherController extends \ControllerBase
         $this->assets->addJs('bower_components/modernizr/js/css-scrollbars.js');
         //sweet alert js -->
         $this->assets->addJs('bower_components/sweetalert/js/sweetalert.min.js');
-//        $this->assets->addJs('assets/js/modal.js');
         $this->assets->addJs('assets/js/hai.js');
         // sweet alert modal.js intialize js -->
         // modalEffects js nifty modal window effects -->
@@ -41,33 +40,32 @@ class TeacherController extends \ControllerBase
         //Custom js -->
         $this->assets->addJs('assets/js/script.js');
         $this->assets->addJs('assets/js/bootstrap-growl.min.js');
-//        $this->assets->addJs('assets/pages/notification/notification.js');
         $this->assets->addJs('assets/js/pcoded.min.js');
         $this->assets->addJs('assets/js/vertical/vertical-layout.min.js');
         $this->assets->addJs('assets/js/jquery.mCustomScrollbar.concat.min.js');
 
     }
 
-    public function beforeExecuteRoute($dispatcher)
-    {
-        $abc = $this->session->get('user');
-//        var_dump($abc['role']);exit();
-        $role = $abc['role'];
-        if ($role == '1') {
-            $this->flashSession->error(
-                "Bạn không có quyền vào mục quản lý giáo viên"
-            );
+//     public function beforeExecuteRoute($dispatcher)
+//     {
+//         $abc = $this->session->get('user');
+// //        var_dump($abc['role']);exit();
+//         $role = $abc['role'];
+//         if ($role == '1') {
+//             $this->flashSession->error(
+//                 "Bạn không có quyền vào mục quản lý giáo viên"
+//             );
 
-            $this->dispatcher->forward(
-                [
-                    'controller' => 'index',
-                    'action'     => 'index',
-                ]
-            );
+//             $this->dispatcher->forward(
+//                 [
+//                     'controller' => 'index',
+//                     'action'     => 'index',
+//                 ]
+//             );
 
-            return false;
-        }
-    }
+//             return false;
+//         }
+//     }
 
     public function indexAction()
     {
@@ -116,39 +114,6 @@ class TeacherController extends \ControllerBase
 
         $teachers = $this->modelsManager->executeQuery($phql1);
         $aha = [];
-//        $teachers1 = Teacher::find();
-//        foreach ($teachers1 as $value){
-//            $ab = $value->BookTeacher ? $value->BookTeacher : NULL;
-//            if($ab){
-//                foreach ($value->BookTeacher as $va){
-//                    $aha = [
-//                        'class_id' => $va->Book->class_id,
-//                        'name' => $va->Book->name
-//                    ];
-//                }
-//            }
-//        }
-
-
-//        $teacherBook  = Teacher::find([
-//            'conditions'  =>  'id = :id:',
-//            'bind'  =>  [
-//                'id'  =>  '23',
-//            ],
-//        ]);
-//        foreach ($teacherBook as $value){
-//            $ab = $value->BookTeacher ? $value->BookTeacher : NULL;
-//            if($ab){
-//                foreach ($value->BookTeacher as $va){
-//                    $aha = [
-//                        'class_id' => $va->Book->class_id,
-//                        'name' => $va->Book->name
-//                    ];
-//                }
-//            }
-//        }
-//        var_dump($aha);
-//        exit();
         $totalItems = count($paginate);
         $itemsPerPage = 15;
         $currentPage = $pages;
@@ -158,12 +123,6 @@ class TeacherController extends \ControllerBase
         $paginator->setMaxPagesToShow(7);
 
         $teacherBook = BookTeacher::find();
-//        $teacherBookSql = "SELECT DISTINCT  Book.class_id, Book.name FROM Teacher LEFT JOIN BookTeacher on Teacher.code = BookTeacher.teacher_code
-//                LEFT JOIN Book on BookTeacher.book_code = Book.code";
-//        $teacherBook = $this->modelsManager->executeQuery($teacherBookSql);
-//        var_dump($teacherBook);exit();
-
-
         $this->view->setVars(
             [
                 'teachers'      => $teachers,
@@ -184,56 +143,50 @@ class TeacherController extends \ControllerBase
     }
 
 
-    public function createAction()
-    {
-        $this->assets->addCss('css/hai.css');
-        $teacher = new Teacher();
-//        $bookTeacher = new BookTeacher();
-        $name = $this->session->get('user_fullname');
-        $str = [];
+//     public function createAction()
+//     {
+//         $this->assets->addCss('css/hai.css');
+//         $teacher = new Teacher();
+//         $name = $this->session->get('user_fullname');
+//         $str = [];
 
-        if($this->request->isPost()) {
+//         if($this->request->isPost()) {
 
-            $abc = explode(" ", $this->request->getPost('txtcode','trim'));
-            $teacher->code = implode('', $abc);
-            $teacher->fullname = $this->request->getPost('txtfullname', 'trim');
-            $teacher->phone = $this->request->getPost('txtphone', 'trim');
-            $teacher->email = $this->request->getPost('txtemail', 'trim');
-            $teacher->address = $this->request->getPost('txtaddress', 'trim');
-            $teacher->facebook = $this->request->getPost('txtfacebook');
-            $teacher->youtube_chanel = $this->request->getPost('txtyoutube_chanel');
-            $teacher->created_by = $name;
-            $success = $teacher->save();
+//             $abc = explode(" ", $this->request->getPost('txtcode','trim'));
+//             $teacher->code = implode('', $abc);
+//             $teacher->fullname = $this->request->getPost('txtfullname', 'trim');
+//             $teacher->phone = $this->request->getPost('txtphone', 'trim');
+//             $teacher->email = $this->request->getPost('txtemail', 'trim');
+//             $teacher->address = $this->request->getPost('txtaddress', 'trim');
+//             $teacher->facebook = $this->request->getPost('txtfacebook');
+//             $teacher->youtube_chanel = $this->request->getPost('txtyoutube_chanel');
+//             $teacher->created_by = $name;
+//             $success = $teacher->save();
 
-//            $bookTeacher->book_code = $this->request->getPost('txtbook_code');
-//            $bookTeacher->teacher_code = $this->request->getPost('txtcode');
-//            $bookTeacher->save();
-
-            if ($success) {
-                $this->flashSession->success('Thêm mới nhân viên thành công');
-//                $this->response->redirect('teacher');
-                $this->dispatcher->forward(
-                    [
-                        'controller' => 'teacher',
-                        'action' => 'index',
-                    ]
-                );
-            } else {
-                $messages = $teacher->getMessages();
-                foreach ($messages as $message) {
-                    $str[$message->getField()] = $message->getMessage();
-//                    $str[] = $message->getField() . '=' . $message->getMessage();
-                }
-//                var_dump($str);die();
-            }
-        }
-        $this->view->setVar('str', $str);
-    }
+//             if ($success) {
+//                 $this->flashSession->success('Thêm mới nhân viên thành công');
+// //                $this->response->redirect('teacher');
+//                 $this->dispatcher->forward(
+//                     [
+//                         'controller' => 'teacher',
+//                         'action' => 'index',
+//                     ]
+//                 );
+//             } else {
+//                 $messages = $teacher->getMessages();
+//                 foreach ($messages as $message) {
+//                     $str[$message->getField()] = $message->getMessage();
+// //                    $str[] = $message->getField() . '=' . $message->getMessage();
+//                 }
+// //                var_dump($str);die();
+//             }
+//         }
+//         $this->view->setVar('str', $str);
+//     }
 
     public function saveAction()
     {
         $teacher = new Teacher();
-//        $bookTeacher = new BookTeacher();
         $name = $this->session->get('user_fullname');
         if($this->request->isPost()) {
 
@@ -246,10 +199,6 @@ class TeacherController extends \ControllerBase
             $teacher->youtube_chanel = $this->request->getPost('txtyoutube_chanel');
             $teacher->created_by = $name;
             $success = $teacher->save();
-
-//            $bookTeacher->book_code = $this->request->getPost('txtbook_code');
-//            $bookTeacher->teacher_code = $this->request->getPost('txtcode');
-//            $bookTeacher->save();
 
             if ($success) {
                 $this->flashSession->success('Thêm thành công');
@@ -264,18 +213,11 @@ class TeacherController extends \ControllerBase
         }
     }
 
-    public function editAction($id)
+    public function editAction()
     {
         $this->assets->addCss('css/hai.css');
-        $teacher = Teacher::findFirst($id);
-//        var_dump($teacher->code); exit();
-        $conditions = ['TeacherID' => $id];
-//        $bookTeacher = BookTeacher::findFirst([
-//            'conditions'    => 'id=:TeacherID:',
-//            'bind'          => $conditions,
-//        ]);
-//        var_dump($bookTeacher);exit();
-        $str = [];
+        $user_id = $this->session->get('user_id');
+        $teacher = Teacher::findFirst($user_id);
         if ($this->request->isPost()){
             $code = $this->request->get('txtcode', 'trim');
             $fullname = $this->request->get('txtfullname' , 'trim');
@@ -285,8 +227,6 @@ class TeacherController extends \ControllerBase
             $facebook = $this->request->get('txtfacebook');
             $youtube_chanel = $this->request->get('txtyoutube_chanel');
 
-//            $book_code = $this->request->get('txtbook_code');
-
             $teacher->code = $code;
             $teacher->fullname = $fullname;
             $teacher->phone = $phone;
@@ -294,47 +234,31 @@ class TeacherController extends \ControllerBase
             $teacher->address = $address;
             $teacher->facebook = $facebook;
             $teacher->youtube_chanel = $youtube_chanel;
-//            $bookTeacher->book_code = $book_code;
-            $success = $teacher->save();
+            // $users = Users::query()
+            // ->where("email = $email_nv")
+            // ->execute() ;
+            // $users = Users::findFirst($user_id);
+            $success = $teacher->update();
 
-//            if ($teacher->save() && $bookTeacher->save()){
             if ($success){
-                $this->flashSession->success('Chỉnh sửa nhân viên thành công!');
-                return $this->response->redirect('teacher');
+                $this->flashSession->success('Chỉnh sửa thông tin thành công!');
+                return $this->response->redirect('index');
             } else {
                 $messages  =$teacher->getMessages();
-//                var_dump($messages);exit();
                 foreach ($messages as $message){
-//                    $this->flashSession->error($message);
                     $str[$message->getField()] = $message->getMessage();
                 }
             }
         }
-//        $this->view->setVar('teacher' , $teacher);
         $this->view->setVars(['teacher' => $teacher, 'str' => $str]);
     }
 
-    public function detailAction()
-    {
-
-    }
-
     public function deleteAction($id){
-//        var_dump($id);exit();
         $conditions = ['teacherID' => $id];
         $teacher = Teacher::findFirst([
             'conditions' => 'id=:teacherID:',
             'bind'       => $conditions,
         ]);
-//        var_dump($teacher);exit();
-
-//        $conditions_teacherBook = ['TeacherCode' => $teacher->code];
-//        $bookTeacher = BookTeacher::findFirst([
-//            'conditions'    => 'teacher_code=:TeacherCode:',
-//            'bind'          => $conditions_teacherBook,
-//        ]);
-//        var_dump($bookTeacher); exit();
-//        if ($teacher->delete() === false || $bookTeacher->delete() == false){
         if ($teacher->delete() === false){
             $messages = $teacher->getMessages();
             foreach ($messages as $message){
@@ -371,7 +295,6 @@ class TeacherController extends \ControllerBase
     }
 
     public function deleteModelAction($id){
-//        var_dump($id);exit();
         $conditions = ['teacherID' => $id];
         $teacher = Teacher::findFirst([
             'conditions' => 'id=:teacherID:',
@@ -393,7 +316,6 @@ class TeacherController extends \ControllerBase
         $this->view->disable();
         //lay tham so tu request
         $code = $this->request->getPost('code', 'trim');
-//        console.log($code);
         //kiem tra trung trong CSDL (findfirst())
         $data = Teacher::findFirst(
             [
@@ -424,66 +346,48 @@ class TeacherController extends \ControllerBase
                 'id'  =>  $book_code,
             ],
         ]);
+    
         foreach ($teacherBook as $value){
             $ab = $value->BookTeacher ? $value->BookTeacher : NULL;
-            if($ab){
-                foreach ($value->BookTeacher as $va){
-                    $aha[] = [
-                        'name' => $va->Book->name,
-                        'class_id' => $va->Book->class_id
-                    ];
+            $name_nv = $value->fullname;
+            // lấy ra ngày tháng hiện tại
+            $date_now = date('d', time());
+            $month_now = date('m', time());
+            $year_now = date('Y', time());
+            
+            $users = Bills::query()
+            ->where("created_by = '$name_nv'")
+            ->andWhere("DAY(created_at) = '$date_now'")
+            ->andWhere("MONTH(created_at) = '$month_now'")
+            ->andWhere("YEAR(created_at) = '$year_now'")
+            ->execute() ;
+
+            $total_bills = count($users);
+
+            if($users){
+                foreach ($users as $va){
+                    $book_id = $va->book_id;
+                    $book_id = explode(',', $book_id);
+                    foreach ($book_id as $key => $value) {
+                        $books = Book::findFirst($value);
+                        $book_name[] = $books->name;
+                    }
+                    $book_name = array_unique($book_name);
+                    $bill_code = $va->bill_code;
+                    $id = $va->id;
+                    $total_price = $va->total_price;
+                        $aha[] = [
+                                'bill_code' => $bill_code,
+                                'id' => $id,
+                                'book_name' => $book_name,
+                                'total_price' => $total_price
+                        ];
                 }
             }
         };
         return json_encode($aha);
-
     }
-     public function catrucAction()
-    {
-        $this->assets->addCss('node_modules/fullcalendar/core/main.css');
-        $this->assets->addCss('node_modules/fullcalendar/timegrid/main.min.css');
-
-        $this->assets->addJs('node_modules/fullcalendar/core/main.min.js');
-        $this->assets->addJs('node_modules/fullcalendar/interaction/main.min.js');
-        $this->assets->addJs('node_modules/fullcalendar/daygrid/main.min.js');
-        $this->assets->addJs('node_modules/fullcalendar/timegrid/main.js');
-        $this->assets->addJs('node_modules/fullcalendar/resource-common/main.js');
-        $this->assets->addJs('node_modules/fullcalendar/resource-daygrid/main.min.js');
-        $this->assets->addJs('node_modules/fullcalendar/resource-timegrid/main.js');
-        $this->assets->addJs('assets/js/tooltip.min.js');
-        $this->assets->addJs('assets/js/calendar.js');
-
-        if ($this->request->isPost()) {
-            $this->persistent->filterCalendar = $this->request->getPost();
-        }
-
-        if (isset($this->persistent->filterCalendar)) {
-            if (isset($this->persistent->filterCalendar['reset'])) {
-                $this->persistent->remove('filterCalendar');
-            }
-            foreach ($this->persistent->filterCalendar as $key => $val) {
-                $this->tag->setDefault($key, $val);
-            }
-        }
-
-        // $subjects = Subject::find()->toArray();
-        // $grades = Grade::find()->toArray();
-
-        $subject = $grade = [];
-        foreach ($subjects as $key => $val) {
-            $subject[$val['id']] = $val['name'];
-        }
-
-        foreach ($grades as $keys => $vals) {
-            $grade[$vals['id']] = $vals['name'];
-        }
-        
-        $this->view->setVars([
-            'subject' => $subject,
-            'grade' => $grade
-        ]);
-        $this->view->pick('teacher/catruc');
-    }
+    
 
 }
 

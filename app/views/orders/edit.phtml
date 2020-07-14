@@ -76,18 +76,17 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label text-label-left font-text pl50"> Ghi chú:</label>
                             <div class="col-sm-10 pl50">
-                                <textarea name="contenmail" value="<?= $notes?>"><?= $notes?></textarea>
-                                <br/>
-                                <p class="erroreditor" style="color: red; font-size: 15px"></p>
-                                <p hidden class="results" style="color: green;"></p>
+                               <textarea class="contenmail" name="contenmail"><?= $orders->note?></textarea>
+                                            <br/>
+                                            <p class="erroreditor" style="color: red; font-size: 15px"></p>
+                                            <p hidden class="results" style="color: green;"></p>
                                 <span class="messages"></span>
                             </div>
                         </div>
-
                 <div class="mt40">  
                     <input style="float: left; width: 100px" type="reset" class="btn btn-secondary" value="Reset">
                     <a  style="float: right" href="<?php echo $this->url->get('orders')?>" class ="text-label-right  btn btn-primary m-b-0 ">Đóng</a>
-                    <input style="float: right; margin-right: 20px; width: 100px" type="submit" class="btn btn-danger" value="Sửa">
+                    <input style="float: right; margin-right: 20px; width: 100px" type="submit" class="edit-bil btn btn-danger" value="Sửa">
                   
                 </div>
             </div>

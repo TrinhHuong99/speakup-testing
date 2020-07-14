@@ -41,7 +41,10 @@
 								"class" => "form-horizontal",
 								"id"=>"create-command",
 								"method"=>"get",
-								"enctype" => "multipart/form-data"]); ?>
+								"style"=>"margin-left: -38px;",
+								"enctype" => "multipart/form-data"]); 
+
+								?>
 							
 								<div class="form-group row">
 									<div class="col-sm-4">
@@ -84,37 +87,7 @@
 									</div>
 								</div>
 								<div class="form-group row">
-									<div class="col-sm-4">
-										<div class="row">
-											<label class="col-sm-5 col-form-label text-label-right  font-text">Từ ngày:</label>
-											<div class="col-sm-7">
-												<input name="startDate" value="<?php echo $startDate ? $startDate :'' ?>" class="form-control" type="date"/>
-												<span class="messages"></span>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="row">
-											<label class="col-sm-5 col-form-label text-label-right  font-text">Đến ngày:</label>
-											<div class="col-sm-7">
-												<input  name="endDate" value="<?php echo $endDate ? $endDate :'' ?>"  class="form-control" type="date"/>
-												<span class="messages"></span>
-											</div>
-										</div>
-									</div>
-									<!-- <div class="col-sm-4">
-										<div class="row">
-											<label class="col-sm-5 col-form-label text-label-right  font-text" >Lớp:</label>
-											<div class="col-sm-7">
-												<select name="class_id" class="browser-default custom-select">
-													<option></option>
-													<?php $x = 1; for($x; $x<=12; $x++){?>
-														<option value="<?php echo $x ?>"<?php echo $x == $class_id ? 'selected' : '' ?>><?php echo $x?></option>
-													<?php } ?>
-												</select>
-											</div>
-										</div>
-									</div> -->
+						
 								</div>
 								<div class="form-group row">
 										<div class="col-sm-12">
@@ -124,7 +97,7 @@
 									</div>
 								</div>
 							</form>
-			<div class="card-header">
+			<div class="card-header" style=" margin-top: -20px;">
 				<a href="<?php echo $this->url->get('book/create')?>" class ="btn btn-warning m-b-0 ">Thêm mới sách</a>
 					<span   class="font-we6 font-da-cursive" style="float: right; padding-top: 15px;">Tổng số sách: <?= $count?></span>
 				</div>
@@ -149,7 +122,6 @@
 													<!-- <th class="sorting_disabled" rowspan="1" colspan="1">Lớp</th> -->
 												<!-- 	<th class="sorting_disabled" rowspan="1" colspan="1">
 													Hdsd</th> -->
-													<th class="sorting_disabled" rowspan="1" colspan="1"> Ngày tạo</th>
 													<th class="sorting_disabled" rowspan="1" colspan="3">Tùy Chọn</th>
 												</tr>
 											</thead>
@@ -162,9 +134,6 @@
 														<td><?php echo $book->name ?></td>
 														<!-- <td><?php echo $book->class_id ?></td> -->
 														<!-- <td><?php echo $book->attachs ?></td> -->
-														<td><?php echo date("d-m-Y H:m:i", strtotime($book->created_at)); ?></td>
-
-
 														<td>
 															<a class="btn btn-info icon-table" href="<?php echo $this->url->get('book/detail/'.$book->id)?>" title="">
 																<span class="zmdi zmdi-menu"></span>
