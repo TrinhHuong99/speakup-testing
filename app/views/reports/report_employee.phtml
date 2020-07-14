@@ -1,0 +1,84 @@
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Quản Lý Báo Cáo
+                    </h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="index.html">
+                            <i class="feather icon-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#!">Quản Lý Báo Cáo</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="pcoded-inner-content">
+    <div class="main-body">
+
+        <div class="page-wrapper">
+        <div class="page-body">
+            <!-- [ page content ] start -->
+            <div class="row">
+
+                <!-- site Analytics card start -->
+
+                <div class="col-lg-12 col-md-12">
+                    <div class="card">
+                        <div class="card-header font-text font-faauto ">
+                            <h2>Báo Cáo Thống Kê Nhân Viên</h2>
+                            <p><?php $this->flashSession->output(); ?></p>
+                        </div>
+                      <form  action="<?php echo $this->url->get('report/filterbills') ?>" id="filter-data" method="post" class="form-search form">
+                                 <div class="row">
+                                    <div class=" ml30 mb15 col-sm-1 font-text" >
+                                   
+                                    </div>
+                                    <div class=" mt15 mb15 col-sm-3 font-text" >
+                                        <label for="">Từ ngày</label>
+                                        <input class="form-control date-start date1" type="date" name="start" value="<?php echo $start ?>">
+                                    </div>
+                                    <div class=" mt15 mb15 ml50 col-sm-3 font-text">
+                                        <label for="">Đến ngày</label>
+                                        <input class="form-control date-end date1" type="date" name="end" value="<?php echo $end ?>">
+                                    </div>
+                                </div>
+                                <div class="clearfix mb20 mr50">
+                                    <div class="pull-right">
+                                        <!-- <a href="" class="btn btn-primary btn-sm">Xem báo cáo</a> -->
+                                         <button type="submit" class="btn btn-primary btn-sm ">Xem báo cáo</button>
+                                    </div>
+                                </div>
+                        </form>
+                        <div class="card-block">
+                            <div class="row mt20">
+                                <div class="col-sm-7">
+                                    
+                                </div>
+                                <div class="col-sm-5">
+                                    <div style="width: 240px; margin: 0 auto">
+                                        <canvas id="hourly-canvas-4"></canvas>
+                                    </div>
+                                    <div class="row">
+                                        <p class="col-lg-12 text-label-center  font-text mt10">
+                                        Biểu đồ theo nhân viên </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+

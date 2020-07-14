@@ -1,5 +1,4 @@
 'use strict';
-
 $(document).on('change', '#teachercheck', function(event) {
     // alert("111");
     var checked = "";
@@ -18,13 +17,9 @@ $(document).on('change', '#teachercheck', function(event) {
 });
 
 $(document).on('click', '#athea', function(event) {
-    // var val = $("i#checkteacher1").attr("class");
     var val = $(this).data('teacher');
-    // alert(val);
     var id = $(this).find('i').attr('id');
-    // console.log(id);
     var geturl = $(this).attr('geturl1');
-    // alert(geturl);
     $.ajax({
         type: 'post',
         url: geturl,
@@ -49,37 +44,6 @@ $('#confirm-delete').on('show.bs.modal', function(e) {
     $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
 });
 
-
-// $(window).on('load',function(){
-//     //Welcome Message (not for login page)
-//     function notify(message, type){
-//         $.growl({
-//             message: message
-//         },{
-//             type: type,
-//             allow_dismiss: false,
-//             label: 'Cancel',
-//             className: 'btn-xs btn-inverse',
-//             placement: {
-//                 from: 'bottom',
-//                 align: 'right'
-//             },
-//             delay: 2500,
-//             animate: {
-//                 enter: 'animated fadeInRight',
-//                 exit: 'animated fadeOutRight'
-//             },
-//             offset: {
-//                 x: 30,
-//                 y: 30
-//             }
-//         });
-//     };
-//
-//
-//     notify('Welcome to Notification page', 'inverse');
-//
-// });
 
 $(document).ready(function() {
 
@@ -338,68 +302,35 @@ function keydownFunction() {
     document.getElementById("themmoi").remove()
 }
 
-// $('#crete_teacher').on('submit', function(e) {
-//     // alert('123');
-//     var $this =  $(this);
-//     e.preventDefault(); // Now nothing will happen
-//     var geturl = $(this).find('input').attr('geturl1');
-//     // alert(geturl);
-//     // var getvalue = $('#kemtratrung').val()
-//     // alert(getvalue);
-//     //goi ajax de kiem tra trung
-//     $.ajax({
-//         "type" : "POST",
-//         "url": geturl,
-//         "data": {code: $('#kemtratrung').val()},
-//         "success": function(ret) {
-//             console.log(ret);
-//             if (ret == 1) {
-//                 $this.submit();
-//             } else {
-//                 alert(2)
-//             }
-//         }
-//
-//
-//     })
-//
-//     // this.submit(); //gui gia tri lai form
-// });
 
 $(document).on('click', '#lknn', function(event) {
     var val = $(this).data('book');
-    // alert(val);
     var geturl = $(this).attr('geturlbook');
-    // alert(geturl);
-    $.ajax({
-        type: 'post',
-        url: geturl,
-        data :{ databook: val},
-        // success: function () {
-        //     // window.location.reload();
-        //
-        // }
-    })
-    // return true;
-    .done(function(data) {
-            let job = JSON.parse(data);
-            // console.log(job);
-            let html = '';
-            html = '';
-            $.each(job,function(index, val) {
-                // console.log(index);
-                // console.log(val);
-                html += '<tr>'
-                html+='<td style="text-align: center">' + (index+1) +'</td>';
-                html+='<td>' + val.name +'</td>';
-                // html+='<td style="text-align: center">' + val.class_id +'</td>';
-                html+='</tr>';
-            });
-            $(' #listitembook').html(html);
-            // $('.hai').modal('show');
+    if (val !='') {
+        $.ajax({
+                "type": "POST",
+                "url": geturl,
+                "data": {databook: val},
+                "success": function (res) {
 
-    })
-    .fail(function() {
-        console.log("error");
-    });
+                    let job = JSON.parse(res);
+                    let html = '';
+                    html = '';
+                        $.each(job,function(index, val) {
+                            // console.log(val);
+                            html += '<tr style="text-align: center">'
+                            html+='<td >' + (index+1) +'</td>';
+                            html+='<td>' + val.bill_code +'</td>';
+                            html+='<td>' + val.total_price +'</td>';
+                            html+='<td>' + val.book_name +'</td>';
+                            // html+='<td style="text-align: center">' + val.class_id +'</td>';
+                            html+='</tr>';
+                        });
+                        $(' #listitembook').html(html);
+                        $('hai').html(html);
+                    // $('.hai').modal('show');
+
+                }
+            });
+      }
 });

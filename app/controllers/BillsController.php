@@ -44,6 +44,7 @@ class BillsController extends \ControllerBase
     $this->assets->addJs('assets/pages/advance-elements/select2-custom.js');
     $this->assets->addJs('assets/pages/form-validation/validate.js');
     $this->assets->addJs('js/myjs.js');
+    $this->assets->addJs('assets/js/update.js');
     $this->assets->addJs('js/datepicker.js');
 
 
@@ -143,9 +144,28 @@ class BillsController extends \ControllerBase
 
         if($this->request->isPost())
         { 
-
+     
         $bill_code = $this->request->getPost('code');
         $book_id = $this->request->getPost('book_name');
+
+        $book_name =  json_encode($book_id);
+        $book_name =  str_replace('"', '',$book_name);
+        $book_name =  str_replace('[', '',$book_name);
+        $book_name =  str_replace(']', '',$book_name);
+
+        foreach ($book_id as $key => $value) {
+          $books1 = Book::findFirst($value);
+          $number_book = $books1->total_book;
+          $$number_book = $number_book + 1;
+          $books1->total_book = $number_book;
+          $success = $books1->update();  
+
+          $price_book[] = $books1->price;
+
+        }
+        // tính tổng của các giá sách cộng lại
+        $tot_price = array_sum($price_book);
+
         $birthday = $this->request->getPost('birthday');
         $name_customer  = $this->request->getPost('name_customer');
         $discount  = $this->request->getPost('discount');
@@ -155,16 +175,20 @@ class BillsController extends \ControllerBase
         $date_birthday = date_create($birthday);
         $birthday_customer = date_format($date_birthday,"Y-m-d H:i:s");
 
+        // tính thổng số tiền theo % discount
+        $price_tru = ($tot_price/100) * $discount;
+        $total_price = $tot_price - $price_tru;
+
+        $bills->price = $tot_price;
+        $bills->total_price = $total_price;
         $bills->bill_code = $bill_code;
-        $bills->book_id = $book_id;
+        $bills->book_id = $book_name;
         $bills->name_customer = $name_customer;
         $bills->discount = $discount;
         $bills->birthday_customer  = $birthday_customer;
         $bills->note  = $contenmail;
         $bills->created_by = $created_bys;
-        // echo "<pre>";
-        // var_dump($bills);
-        // exit();
+
         $success = $bills->save();
         if($success)
         {
@@ -208,314 +232,22 @@ class BillsController extends \ControllerBase
       die;
     }
 
-    public function updateAction($id)
-    {
-      $book = Book::findFirst($id);
-
-      $fileupload = $this->request->getPost('hdsd');
-      if($this->request->isPost())
-      {
-        $arr = [];
-        $created_bys = $this->session->get('user_fullname');
-
-        $book->code = $this->request->getPost('code');
-        $book->name = $this->request->getPost('name');
-        $book->group_id = $this->request->getPost('group_id');
-        $book->class_id = $this->request->getPost('class_id');
-        if ($this->request->hasFiles() == true) 
-        {
-          $files = $this->request->getUploadedFiles();
-
-                      // Print the real file names and sizes
-          foreach ($files as $file) 
-          {
-           $hdsd = $book->attachs = $file->getName();
-           $file->moveTo('upload/' . $file->getName());
-         }
-       }
-       $book->attachs  = $hdsd  == '' ? $fileupload : $hdsd;
-       $book->created_by = $created_bys;
-       $success = $book->save();
-       $book->BookTeacher->delete();
-       $teacher = $this->request->getPost('teacher');
-       foreach ($teacher as $key => $value) {
-        $teacher = new BookTeacher();
-        $teacher->book_code = $this->request->getPost('code');
-        $teacher->teacher_code = $value;
-        $teacher->save();
-      }
-          $book->BookTempMail->delete();
-          $tempemail = new BookTempMail();
-          $tempemail->book_code = $this->request->getPost('code');
-          $tempemail->title = $this->request->getPost('subjectemail');
-          $tempemail->content = $this->request->getPost('contenmail');
-          $tempemail->save();
-
-      if($success)
-      {
-        $this->flashSession->success('Chỉnh sửa sách  thành công');
-        $this->response->redirect('book');
-      }
-      else
-      {
-        $messages  =$book->getMessages();
-        foreach ($messages as $message)
-        {
-          $this->flashSession->error($message);
-        }
-        return $this->dispatcher->forward(
-          [
-            'controller' => 'book',
-            'action' => 'edit',
-            'params' => [$book->id]
-          ]
-        );
-      }
-    }
-  }
+ 
   public function detailAction($id)
   {
   
     $bills = Bills::findFirst($id);
     $book_id = $bills->book_id;
-    $books = Book::findFirst($book_id);
-
+    $book_id = explode(',', $book_id);
+    foreach ($book_id as $key => $value) {
+      $books = Book::findFirst($value);
+      $book_name[] = $books->name;
+    }
     $this->view->setVars([
       'bills' => $bills,
-      'books'=> $books,
+      'book_name'=> $book_name,
     ]);
 
-  }
-
-  private function generateRandomString($length = 6) 
-  {
-    $characters = '0123456789';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-      $randomString .= str_shuffle($characters[mt_rand(0, $charactersLength - 1)]);
-    }
-    return $randomString;
-  }
-  private function errorrepublist($errors , $book_code,$count)
-  {
-    $sum = 0;
-      for($i = 1; $i <= $errors; $i++)
-          {
-            $randomstr = $this->generateRandomString();
-            $republish = new Republish();
-            $code_items = $book_code . $randomstr;
-            $republish->book_code = $book_code;
-            $republish->code_item = $code_items; 
-            $republish->republish = $count; 
-            if (!$republish->save()) {
-              $sum++;
-            }
-          }
-          if (!empty($sum)) {
-             $this->errorrepublist($sum,$book_code,$count);
-      }
-  }
-
-  public function republistAction()
-  {
-      $abc = $this->session->get('user');
-//        var_dump($abc['role']);exit();
-      $role = $abc['role'];
-      if ($role == '1') {
-          $this->flashSession->error(
-              "Bạn không có quyền tái bản sách"
-          );
-
-          $this->dispatcher->forward(
-              [
-                  'controller' => 'index',
-                  'action'     => 'index',
-              ]
-          );
-
-          return false;
-      }
-          $republish = Republish::find();
-          $geturl = $this->request->getPost('geturl');
-          $number  = (int) $this->request->getPost('number');
-          $book_code = $this->request->getPost('book_code');
-          $count = $this->request->getPost('count');
-          $book = Book::findFirst(
-            [
-              'code  = :code:',
-              'bind' =>['code' => $book_code,] 
-            ]
-          );
-
-          $errors = 0;
-          if($this->request->isPost()) {
-           for($i = 1; $i <= $number; $i++)
-           {
-            $randomstr = $this->generateRandomString();
-            $republish = new Republish();
-            $code_items = $book_code . $randomstr;
-            $republish->book_code = $book_code;
-            $republish->code_item = $code_items; 
-            $republish->republish = $count + 1; 
-            if(!$republish->save())
-            {
-              $errors++;
-
-            }
-          }
-          if (!empty($errors)) {
-
-              $this->errorrepublist($errors,$book_code,($count + 1));
-              $this->dispatcher->forward(
-                  [
-                    'controller' => 'book',
-                    'action' => 'detail',
-                    'params' => [$geturl]
-                  ]
-              );
-         }
-         $this->flashSession->success('Thêm  mã in thành công ' );
-         $historyrepublish  = new HistoryRepublish();
-         $historyrepublish->book_code = $book_code;
-         $historyrepublish->message = 'Đã được tái bản';
-         $historyrepublish->save();
-         return $this->dispatcher->forward(
-          [
-            'controller' => 'book',
-            'action' => 'detail',
-            'params' => [$geturl]
-          ]
-        );
-
-      }
-  }
-  public function detailscodeAction()
-  {
-      $this->view->setRenderLevel(
-        View::LEVEL_NO_RENDER
-      );
-      $republish = $this->request->getPost('republish');
-      $book_code = $this->request->getPost('book_code');
-
-      $countrepublishs = Republish::find([
-        'conditions'  =>  'republish = :republish: And book_code = :book_code:',
-        'bind'  =>  [
-          'republish'  =>  $republish, 
-          'book_code'  =>  $book_code, 
-
-        ],
-        'columns'=>'republish, count(id) as total',
-      ]);
-
-      $republishs = Republish::find([
-        'conditions'  =>  'republish = :republish: And book_code = :book_code:',
-        'bind'  =>  [
-          'republish'  =>  $republish, 
-          'book_code'  =>  $book_code, 
-
-        ],
-        'limit' => 10,
-      ]);
-        $republishstotal = Republish::find([
-        'conditions'  =>  'republish = :republish: And book_code = :book_code:',
-        'bind'  =>  [
-          'republish'  =>  $republish, 
-          'book_code'  =>  $book_code, 
-
-        ],
-        'limit' => 10,
-      ]);
-        $counttotal = count($republishstotal);
-
-      return json_encode([$republishs,$countrepublishs,$counttotal]);
-  }
-  public function downloadAction()
-  {
-      $this->view->setRenderLevel(
-        View::LEVEL_NO_RENDER
-      );
-      $alert = [
-        'success' => true,
-        'result' => '',
-        'page' => 1,
-        'percent' => 0
-      ];
-
-      if($this->request->isPost())
-      {
-        $currentPage = (int) $this->request->getPost('page', 'int');
-        $republish = $this->request->getPost('republish');
-        $book_code = $this->request->getPost('book_code');
-        $pages = $currentPage ? $currentPage : 1;
-        $code_items = Republish::find([
-          'conditions'  =>  'republish = :republish: And book_code = :book_code:',
-          'bind'  =>  [
-            'republish'  =>  $republish, 
-            'book_code'  =>  $book_code,
-
-          ],
-          'limit' => 100,
-          'offset' => ($pages -1)*100,
-        ]);
-        $republishs = Republish::find([
-          'conditions'  =>  'republish = :republish: And book_code = :book_code:',
-          'bind'  =>  [
-            'republish'  =>  $republish, 
-            'book_code'  =>  $book_code, 
-
-          ],
-          'columns'=>'republish, count(id) as total',
-        ])->toArray();
-        $data =[];
-        foreach ($republishs as $key => $val) {
-          $data[] = $val['total'];
-        }
-        $data['page'] = $currentPage ? $currentPage : 1;
-        $data['limit'] = 100;
-        $total_page = ceil($data[0]/100);
-        $user = $this->session->getId();
-        if (!empty($code_items) ){
-          if ($data['page'] == 1) {
-            $spreadsheet = new Spreadsheet();
-          }else{
-            $spreadsheet = IOFactory::load(BASE_PATH.'/public/download/Code_book'.$user.'.csv');
-          }
-          $spreadsheet->setActiveSheetIndex(0);
-          $spreadsheet->getActiveSheet()->setTitle('Ma In');
-          $columnArray = array('A', 'B');
-          $titleArray = array('STT', 'Code Item');
-          $row_count = 1;
-          foreach($columnArray as $key => $val){
-            $spreadsheet->getActiveSheet()->setCellValue($val.$row_count, $titleArray[$key]);
-            $spreadsheet->getActiveSheet()->getColumnDimension($val)->setAutoSize(true);
-          }
-          foreach($code_items as $keyp => $val){
-           $spreadsheet->getActiveSheet()->SetCellValue('A'.(($keyp + 2) + ($data['page'] - 1)*100), (($keyp + 1) + ($data['page'] - 1)*100) ); 
-           $spreadsheet->getActiveSheet()->SetCellValue('B'.(($keyp + 2) + ($data['page'] - 1)*100), ($val->code_item));
-         }
-         $writer = IOFactory::createWriter($spreadsheet, 'Csv');
-         $writer->setUseBOM(true);
-         $file_create = ''.BASE_PATH.'/public/download/Code_book'.$user.'.csv';
-         $writer->save($file_create);
-
-         $alert['success'] = true;
-         $alert['page'] = (($data['page'] == $total_page) ? NULL : ($data['page'] + 1));
-         $alert['percent'] =  (($data['page'] == 1) ? 0 : ceil( (($data['page']/$total_page)*100) ) >= 100 ? 100 : ceil( (($data['page']/$total_page)*100) ) );
-         $alert['result'] = '<a href="'.$this->url->getStatic('download/Code_book'.$user.'.csv').'">Tải xuống  tại đây</a>';
-       }
-       elseif($data['page'] == 1){
-
-       }
-       else
-       {
-        $alert['success'] = true;
-        $alert['percent'] = 100;
-        $alert['page'] = NULL;
-        $alert['result'] = '<a href="'.$this->url->getStatic('download/Code_book'.$user.'.csv').'">Tải xuống tại đây!/a> ';
-      }
-    }
-    echo json_encode($alert);die;
   }
 
   public function deleteAction($id)
@@ -532,6 +264,37 @@ class BillsController extends \ControllerBase
     // $book->HistoryRepublish->delete();
     // $book->BookTempMail->delete();
 
+  }
+    public function priceAction()
+  {
+       if ($this->request->isAjax() && $this->request->isPost()) {
+           $book_id = $this->request->getPost('book_id');
+           // $book_i = json_decode($book_id);
+           foreach ($book_id as $key => $value) {
+             $books = Book::findFirst($value);
+             $price_book[] = $books->price;
+           }
+           $tot_price = array_sum($price_book);
+            echo $tot_price .' '.'<strong>đ</strong>';
+        exit();
+        }
+  }
+      public function totalpriceAction()
+  {
+       if ($this->request->isAjax() && $this->request->isPost()) {
+           $book_id = $this->request->getPost('book_id');
+           $discount_per = $this->request->getPost('discount_per');
+           // $book_i = json_decode($book_id);
+           foreach ($book_id as $key => $value) {
+             $books = Book::findFirst($value);
+             $price_book[] = $books->price;
+           }
+            $tot_price = array_sum($price_book);
+            $price_tru = ($tot_price/100) * $discount_per;
+            $total_price = $tot_price - $price_tru;
+            echo $total_price .' '.'<strong>đ</strong>';
+        exit();
+        }
   }
 
 }

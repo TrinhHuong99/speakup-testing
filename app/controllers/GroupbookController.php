@@ -26,6 +26,7 @@ class GroupbookController extends \ControllerBase
     $this->assets->addCss('assets/css/ukflex.css');
 		//js
     $this->assets->addJs('js/myjs.js');
+    $this->assets->addJs('js/create.js');
     $this->assets->addJs('bower_components/select2/js/select2.full.min.js');
     $this->assets->addJs('bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js');
     $this->assets->addJs('bower_components/multiselect/js/jquery.multi-select.js');

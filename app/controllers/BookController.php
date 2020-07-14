@@ -44,6 +44,7 @@ class BookController extends \ControllerBase
     $this->assets->addJs('assets/pages/advance-elements/select2-custom.js');
     $this->assets->addJs('assets/pages/form-validation/validate.js');
     $this->assets->addJs('js/myjs.js');
+    $this->assets->addJs('js/create.js');
     $this->assets->addJs('js/datepicker.js');
 
 
@@ -128,7 +129,7 @@ class BookController extends \ControllerBase
 
           ]);
       }
-      public function createAction()
+ public function createAction()
       {
 //          $this->assets->addJs('assets/pages/ckeditor/ckeditor.js');
 //          $this->assets->addJs('assets/pages/ckeditor/ckeditor-custom.js');
@@ -144,11 +145,10 @@ class BookController extends \ControllerBase
           $book->code = $this->request->getPost('code');
           $book->name = $name;
           $book->group_id = $this->request->getPost('group_id');
-          $book->class_id = $this->request->getPost('class_id');
+          // $book->class_id = $this->request->getPost('class_id');
           $book->price = $this->request->getPost('price');
           $book->total_book = $this->request->getPost('total_book');
-          var_dump($book);
-          exit();
+   
           if ($this->request->hasFiles() == true) 
           {
             $files = $this->request->getUploadedFiles();
@@ -163,6 +163,7 @@ class BookController extends \ControllerBase
          $book->attachs  = $hdsd;
          $book->created_by = $created_bys;
          $success = $book->save();
+
          $teachers = $this->request->getPost('teacher');
 
          foreach ($teachers as $key => $value) {
@@ -195,7 +196,6 @@ class BookController extends \ControllerBase
       }
       $this->view->setVars(['teachers'=>$teachers,'group_id'=>$group_id]);
     }
-
 
     public function addvalidateAction(){
       $this->view->setRenderLevel(

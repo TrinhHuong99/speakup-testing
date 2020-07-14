@@ -52,7 +52,7 @@ class BookGroup extends ModelBase
             'code',
             new uniqueness(
                 [
-                    'message' => 'Mã nhóm  đã tồn tại',
+                    'message' => 'Mã loại sách đã tồn tại',
                 ]
             )
         );
@@ -60,7 +60,7 @@ class BookGroup extends ModelBase
             'code',
             new presenceof(
                 [
-                    'message' => 'Mã nhóm không được trống',
+                    'message' => 'Mã loại sách không được trống',
                 ]
             )
         );
@@ -68,7 +68,7 @@ class BookGroup extends ModelBase
             'name',
             new presenceof(
                 [
-                    'message' => 'Tên nhóm không được trống',
+                    'message' => 'Tên loại sách không được trống',
                 ]
             )
         );
