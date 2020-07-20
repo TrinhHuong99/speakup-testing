@@ -60,6 +60,23 @@ $di->setShared('view', function () {
 });
 
 /**
+ * Setting up the view component
+ */
+$di->setShared('view', function () {
+    $config = $this->getConfig();
+
+    $view = new View();
+    $view->setDI($this);
+    $view->setViewsDir($config->application->viewsDir);
+    $view->setPartialsDir($config->application->partials);
+    $view->registerEngines([
+        '.phtml' => PhpEngine::class
+
+    ]);
+
+    return $view;
+});
+/**
  * Database connection is created based in the parameters defined in the configuration file
  */
 $di->setShared('db', function () {

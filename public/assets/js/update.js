@@ -66,9 +66,35 @@ $(document).on('change', '.discount', function(event) {
         alert('Hãy chọn đúng tên sách !');
       }
 });
+$(document).on('change', '#selectedtest', function(event) {
+    var discount_per = $('.discount').val();
+    var book_id = $('#selectedtest').val();
+    var geturlgroup = $('.book_discount').attr('data-action');
+     if (book_id !='') {
+        $.ajax({
+                  "type": "POST",
+                  "url": geturlgroup,
+                  "data": {discount_per: discount_per,book_id: book_id},
+                  "success": function (res) {
+                    $( ".total-price" ).html(res);
+                  }
+            });
+      }else{
+        alert('Hãy chọn đúng tên sách !');
+      }
+});
+$(document).on('click', '.edit-bil', function(event) {
 
+    $(".erroreditor").append("Ghi rõ lý do chỉnh sửa hóa đơn nha ! ");
+    // var cke_show_borders = $('.cke_show_borders').attr('html',);
+ 
+});
+
+$(document).ready(function(){
+   $("time.timeago").timeago();
+});
 // $(document).on('click', '.edit-bil', function(event) {
-
+//       console.log('hjbf');
     // var contenmail = $('.contenmail').val();
 
 //     var price = $('.price-1').val();

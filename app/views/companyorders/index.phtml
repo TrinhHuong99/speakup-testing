@@ -3,7 +3,7 @@
         <div class="row align-items-center">
             <div class="col-md-8">
                 <div class="page-header-title">
-                    <h4 class="m-b-10">Công Ty Đặt Hàng</h4>
+                    <h4 class="m-b-10">Nhà Xuất Bản</h4>
                 </div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item">
@@ -12,7 +12,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="#!">Công Ty Đặt Hàng</a>
+                        <a href="#!">Nhà Xuất Bản</a>
                     </li>
                 </ul>
             </div>
@@ -32,7 +32,7 @@
 				<div class="col-lg-12 col-md-12">
 					<div class="card">
 						<div class="card-header font-faauto font-text">
-							<h2>Công Ty Đặt Hàng</h2>
+							<h2>Nhà Xuất Bản</h2>
 							<p><?php $this->flashSession->output(); ?></p>
 						</div>
 						<div class="card-block">
@@ -47,8 +47,8 @@
 								
 									<div class="col-sm-6">
 										<div class="row">
-											<label class="col-sm-3 col-form-label text-label-center">Tên công ty:</label>
-											<div class="col-sm-9">
+											<label class="col-sm-4 col-form-label text-label-center font-text">Tên nhà xuất bản:</label>
+											<div class="col-sm-8">
 												<input type="text" placeholder="Nhập vào đây để tìm kiếm..." class="form-control border-radius" name="company_name" >
 												<span class="messages"></span>
 											</div>
@@ -65,7 +65,7 @@
 								</div>
 							</form>
 				<div class="card-header pt0	">
-				<a href="<?php echo $this->url->get('companyorders/create')?>" class ="btn btn-warning m-b-0 ">Thêm công ty</a>
+				<a href="<?php echo $this->url->get('companyorders/create')?>" class ="btn btn-warning m-b-0 ">Thêm nhà xuất bản</a>
 					<span class="font-we6 font-da-cursive"  style="float: right; padding-top: 15px;">Tổng số công ty: <?= $count?></span>
 				</div>
 				<div class="card-block">
@@ -83,7 +83,7 @@
 												<tr role="row">
 
 													<th class="sorting_disabled" rowspan="1" colspan="1">STT</th>
-													<th class="sorting_disabled" rowspan="1" colspan="1">Tên công ty</th>
+													<th class="sorting_disabled" rowspan="1" colspan="1">Tên nhà xuất bản</th>
 													<th class="sorting_disabled" rowspan="1" colspan="1">Địa chỉ</th>
 													<th class="sorting_disabled" rowspan="1" colspan="1">Link web</th>
 													<th class="sorting_disabled" rowspan="1" colspan="3">Tùy Chọn</th>

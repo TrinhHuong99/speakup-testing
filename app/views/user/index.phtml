@@ -72,7 +72,7 @@
                                     </div>
                                     
                                 </div>
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                     <div class="col-sm-4">
                                         <div class="row">
                                             <label class="col-sm-5 col-form-label text-label-right font-text">Từ ngày:</label>
@@ -92,15 +92,15 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
-                                    <!--     <div class="row">
+                                        <div class="row">
                                             <label class="col-sm-5 col-form-label text-label-right font-text ">Địa chỉ:</label>
                                             <div class="col-sm-7">
                                                 <input type="text" class="form-control border-radius "  placeholder="Nhập vào đây để tìm kiếm..." name="address" value="<?php echo $address ? $address :'' ?>" >
                                                 <span class="messages"></span>
                                             </div>
-                                        </div> -->
+                                        </div> 
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="form-group row">
                                     <div class="col-sm-12">
                                         <div class="pull-right">
@@ -134,7 +134,7 @@
                                                             <th class="sorting_disabled" rowspan="1" colspan="1">SĐT</th>
                                                             <th class="sorting_disabled" rowspan="1" colspan="1">Email</th>
                                                             <th class="sorting_disabled" rowspan="1" colspan="1">Quyền</th>
-                                                            <th class="sorting_disabled" rowspan="1" colspan="1">Ngày Tạo</th>
+                                                            <!-- <th class="sorting_disabled" rowspan="1" colspan="1">Ngày Tạo</th> -->
                                                             <th class="sorting_disabled" rowspan="1" colspan="3">Tùy Chọn</th>
 
                                                         </tr>
@@ -150,7 +150,7 @@
                                                             <td><?php echo $value->phone?></td>
                                                             <td><?php echo $value->email?></td>
                                                             <td><?php echo $value->role == '0' ? 'Admin' : 'Nhân viên'?></td>
-                                                            <td><?php echo date("d-m-Y H:m:i", strtotime($value->created_at));?></td>
+                                                            <!-- <td><?php echo date("d-m-Y H:m:i", strtotime($value->created_at));?></td> -->
                                                             <td>
                                                                 <a class="btn btn-primary icon-table" href="<?= $this->url->get('user/detail/'.$value->id)?> " title="">
                                                                     <span class='zmdi zmdi-menu'></span>

@@ -44,7 +44,7 @@
 										<div class="col-sm-7">
 											<label class="col-form-label">
 												<?php if($book->price){ ?>
-													<?= $book->price?><strong>đ</strong>
+													<?= number_format($book->price) ?><strong>đ</strong>
 												<?php } ?>
 											</label>
 										</div>
@@ -62,7 +62,7 @@
 								</div>
 								<div class="col-sm-6">
 									<div class="row">
-										<label class="col-sm-5 col-form-label font-text text-label-right">HDSD:</label>
+										<label class="col-sm-5 col-form-label font-text text-label-right">Tài Liệu:</label>
 										<div class="col-sm-7">
 											<label class="col-form-label"><?= $book->attachs?></label>
 										</div>

@@ -156,7 +156,7 @@ class BillsController extends \ControllerBase
         foreach ($book_id as $key => $value) {
           $books1 = Book::findFirst($value);
           $number_book = $books1->total_book;
-          $$number_book = $number_book + 1;
+          $number_book = $number_book - 1;
           $books1->total_book = $number_book;
           $success = $books1->update();  
 
