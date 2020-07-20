@@ -44,9 +44,12 @@
 												<?php } ?>
 											</select>  -->
 										<select name="book_name[]" id="selectedtest"  multiple="multiple" class="js-select-book col-sm-12 custom-select select2 ">
-												<?php  foreach($books as $key=>$val) { ?>
+												<?php  foreach($books as $key=>$val) {
+													if($val->total_book != 0){
+												 ?>
+
 													<option  value='<?php echo $val->id ?>'><?php echo $val->name ?></option>
-												<?php }?>
+												<?php }}?>
 											</select> 
 											<span class="messages"></span>
 

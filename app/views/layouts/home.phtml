@@ -28,10 +28,7 @@
                                     <span class="input-group-prepend search-close">
 										<i class="feather icon-x input-group-text"></i>
 									</span>
-                                    <!-- <input type="text" class="form-control" placeholder="Enter Keyword"> -->
-                                   <!--  <span class="input-group-append search-btn">
-										<i class="feather icon-search input-group-text"></i>
-									</span> -->
+                                   
                                 </div>
                             </div>
                         </li>
@@ -45,31 +42,18 @@
                         <li class="user-profile header-notification">
                             <div class="dropdown-primary dropdown">
                                 <div class="dropdown-toggle" data-toggle="dropdown">
-                               <!--      <img src="<?php echo $this->url->getStatic('/assets/images/avatar-4.jpg') ?>" class="img-radius" alt="User-Profile-Image"> -->
+                              
                                     <span> <?= $this->session->get('user_fullname') ?></span> 
                                     <i class="feather icon-chevron-down"></i>
                                 </div>
                                 <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                 <!--    <li>
-                                        <a href="#!">
-                                            <i class="feather icon-settings"></i> Settings
-                                        </a>
-                                    </li> -->
+                                
                                     <li>
                                         <a href="<?php echo $this->url->get('teacher/edit')?>">
                                             <i class="feather icon-user"></i> Profile
                                         </a>
                                     </li>
-                                   <!--  <li>
-                                        <a href="email-inbox.html">
-                                            <i class="feather icon-mail"></i> My Messages
-                                        </a>
-                                    </li> -->
-                                  <!--   <li>
-                                        <a href="auth-lock-screen.html">
-                                            <i class="feather icon-lock"></i> Lock Screen
-                                        </a>
-                                    </li> -->
+                           
                                     <li>
                                         <a href="<?php echo $this->url->get('login/logout')?>">
                                             <i class="feather icon-log-out"></i> Logout
@@ -223,28 +207,7 @@
                 <nav class="pcoded-navbar pod-menu">
                     <div class="pcoded-inner-navbar main-menu">
                         <div class="">
-                            <!-- <div class="main-menu-header">
-                                <img class="img-menu-user img-radius" src="<?php echo $this->url->getStatic('/assets/images/avatar-4.jpg') ?>" alt="User-Profile-Image">
-                                <div class="user-details">
-                                    <p id="more-details"><?= $this->session->get('user_fullname') ?><i class="feather icon-chevron-down m-l-10"></i></p>
-                                </div>
-                            </div>
-                            <div class="main-menu-content">
-                                <ul>
-                                    <li class="more-details">
-                                        <a href="user-profile.html">
-                                            <i class="feather icon-user"></i>View Profile
-                                        </a>
-                                        <a href="#!">
-                                            <i class="feather icon-settings"></i>Settings
-                                        </a>
-                                        <a href="<?php echo $this->url->get('login/logout')?>">
-                                            <i class="feather icon-log-out"></i>Logout
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> -->
+                        
                         <?php
                         function getCurURL()
                         {
@@ -263,9 +226,7 @@
                             return $pageURL;
                         }
                         ?>
-                        <?php
-//                        echo getCurURL();
-                        ?>
+                      
                         <ul class="pcoded-item pcoded-left-item">
                             <li class="<?php echo ($this->router->getControllerName() == '') ? 'active' : '' ?>">
                                 <a href="/bookstore-m" class="waves-effect waves-dark">
@@ -273,33 +234,7 @@
                                     <span class="pcoded-mtext">Dashboard</span>
                                 </a>
                             </li>
-                            <!-- <li class="pcoded-hasmenu <?php echo ($this->router->getControllerName() == 'teacher') ? 'active' : '' ?>">
-                                <a href="javascript: void(0)" class="waves-effect waves-dark">
-									<span class="pcoded-micon">
-                                        <i class="ion-ios-person"></i>
-									</span>
-                                    <span class="pcoded-mtext">Quản Lý Nhân Viên</span>
-                                </a>
-                                <ul class="pcoded-submenu">
-
-                                    <li class="<?php echo (($this->router->getActionName() == 'index' && $this->router->getControllername() == 'contact') ? 'active':'') ?>">
-                                        <a href="<?php echo $this->url->get('contact/index') ?>" class="waves-effect waves-dark">
-                                            <span class="pcoded-mtext"> Loại Sách </span>
-                                        </a>
-                                    </li>
-                                    <li class="<?php echo (($this->router->getActionName() == 'index' && $this->router->getControllername() == 'teacher') ? 'active':'') ?>">
-                                        <a href="<?php echo $this->url->get('teacher/index') ?>" class="waves-effect waves-dark">
-                                            <span class="pcoded-mtext">Danh Sách Nhân Viên</span>
-                                        </a>
-                                    </li>
-                                    <li class="<?php echo (($this->router->getActionName() == 'catruc' && $this->router->getControllername() == 'teacher') ? 'active':'') ?>">
-                                        <a href="<?php echo $this->url->get('teacher/catruc') ?>" class="waves-effect waves-dark">
-                                            <span class="pcoded-mtext">Ca Trực Nhân Viên</span>
-                                        </a>
-                                    </li>
-                                   
-                                </ul>
-                            </li> -->
+                            
                          
                             <li class="<?php echo ($this->router->getControllerName() == 'teacher') ? 'active' : '' ?>">
                                 <a href="<?php echo $this->url->get('teacher/index')?>" class="waves-effect waves-dark">
@@ -386,11 +321,11 @@
                                             <span class="pcoded-mtext">Báo cáo doanh thu</span>
                                         </a>
                                     </li>
-                                    <li class="<?php echo (($this->router->getActionName() == 'create' && $this->router->getControllername() == 'reports') ? 'active':'') ?>">
+                                  <!--   <li class="<?php echo (($this->router->getActionName() == 'create' && $this->router->getControllername() == 'reports') ? 'active':'') ?>">
                                         <a href="<?php echo $this->url->get('reports/report_employee') ?>" class="waves-effect waves-dark">
                                             <span class="pcoded-mtext">Báo cáo theo nhân viên</span>
                                         </a>
-                                    </li>
+                                    </li> -->
                                    
                                 </ul>
                             </li>
@@ -421,65 +356,19 @@
                                     <span class="pcoded-micon">
                                         <i class="ion-ios-people"></i>
                                     </span>
-                                    <span class="pcoded-mtext">Công Ty Đặt Hàng</span>
+                                    <span class="pcoded-mtext">Nhà Xuât Bản</span>
                                 </a>
                             </li>
-                            <!-- <li class="<?php echo ($this->router->getControllerName() == 'invalidmessage' || $this->router->getControllerName() == 'validmessage') ? 'active pcoded-hasmenu pcoded-trigger' : 'pcoded-hasmenu' ?>">
-                                <a href="javascript:void(0)" class="waves-effect waves-dark">
-									<span class="pcoded-micon">
-										<i class="ion-android-mail"></i>
-									</span>
-                                    <span class="pcoded-mtext">Quản lý sms</span>
-                                </a>
-                                <ul class="pcoded-submenu">
-                                    <li class="<?php echo ($this->router->getControllerName() == 'invalidmessage') ? 'active' : '' ?>">
-                                        <a href="<?php echo $this->url->get('invalidmessage')?>" class="waves-effect waves-dark">
-                                            <span class="pcoded-mtext">Tin nhắn không hợp lệ</span>
-                                        </a>
-                                    </li>
-                                    <li class="<?php echo ($this->router->getControllerName() == 'validmessage') ? 'active' : '' ?>">
-                                        <a href="<?php echo $this->url->get('validmessage')?>" class="waves-effect waves-dark">
-                                            <span class="pcoded-mtext">Tin nhắn hợp lệ</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li> -->
+                          
                         </ul>
                     </div>
                 </nav>
 
                 <!-- [ navigation menu ] end -->
                 <div class="pcoded-content">
-                    <!-- [ breadcrumb ] start -->
-<!--                    <div class="page-header">-->
-<!--                        <div class="page-block">-->
-<!--                            <div class="row align-items-center">-->
-<!--                                <div class="col-md-8">-->
-<!--                                    <div class="page-header-title">-->
-<!--                                        <h4 class="m-b-10">Dashboard</h4>-->
-<!--                                    </div>-->
-<!--                                    <ul class="breadcrumb">-->
-<!--                                        <li class="breadcrumb-item">-->
-<!--                                            <a href="index.html">-->
-<!--                                                <i class="feather icon-home"></i>-->
-<!--                                            </a>-->
-<!--                                        </li>-->
-<!--                                        <li class="breadcrumb-item">-->
-<!--                                            <a href="#!">Dashboard</a>-->
-<!--                                        </li>-->
-<!--                                    </ul>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-                    <!-- [ breadcrumb ] end -->
-<!--                    <div class="pcoded-inner-content">-->
-<!--                        <div class="main-body">-->
                             <?php
                             echo $this->getContent();
                             ?>
-<!--                        </div>-->
-<!--                    </div>-->
                 </div>
                 <!-- [ style Customizer ] start -->
 
@@ -488,48 +377,3 @@
         </div>
     </div>
 </div>
-<!-- Warning Section Starts -->
-<!-- Older IE warning message -->
-<!--[if lt IE 10]>
-<div class="ie-warning">
-    <h1>Warning!!</h1>
-    <p>You are using an outdated version of Internet Explorer, please upgrade
-        <br/>to any of the following web browsers to access this website.
-    </p>
-    <div class="iew-container">
-        <ul class="iew-download">
-            <li>
-                <a href="http://www.google.com/chrome/">
-                    <img src="<?php echo $this->url->getStatic('/assets/images/browser/chrome.png') ?>" alt="Chrome">
-                    <div>Chrome</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.mozilla.org/en-US/firefox/new/">
-                    <img src="<?php echo $this->url->getStatic('/assets/images/browser/firefox.png') ?>" alt="Firefox">
-                    <div>Firefox</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://www.opera.com">
-                    <img src="<?php echo $this->url->getStatic('/assets/images/browser/opera.png') ?>" alt="Opera">
-                    <div>Opera</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.apple.com/safari/">
-                    <img src="<?php echo $this->url->getStatic('/assets/images/browser/safari.png') ?>" alt="Safari">
-                    <div>Safari</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                    <img src="<?php echo $this->url->getStatic('/assets/images/browser/ie.png') ?>" alt="">
-                    <div>IE (9 & above)</div>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <p>Sorry for the inconvenience!</p>
-</div>
-<![endif]-->

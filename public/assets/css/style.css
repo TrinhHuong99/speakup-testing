@@ -43,3 +43,18 @@ body{background-color:#ecf0f5;font-size:.9375rem;overflow-x:hidden;color:#373a3c
     padding-bottom: 0px !important;
     padding-top: 25px !important;
 }
+.card{
+	border-radius: 1.25rem;
+
+}
+.latest-update-box{
+	margin-left: 120px;
+    margin-top: 20px;
+}
+time{
+	font-size: small;
+    font-weight: 700;
+}
+.bg-c-green {
+    background-color: chocolate;
+}

@@ -74,7 +74,7 @@
 							<div class="form-group row">
 								<div class="col-sm-6">
 									<div class="row">
-										<label class="col-sm-4 col-form-label text-label-left font-text">Tên công ty:</label>
+										<label class="col-sm-4 col-form-label text-label-left font-text">Tên nhà xuất bản:</label>
 										<div class="col-sm-8">
 											<label class="col-form-label" data-target="#addtaiban" data-toggle="modal">
 												  <u style="color: brown"><i><?=$company_orders->company_name?></i></u>
@@ -173,7 +173,7 @@
 					<div class="form-group row">
 						<div class="col-sm-10">
 							<div class="row">
-								<label class="col-sm-4 col-form-label  font-text">Tên công ty:</label>
+								<label class="col-sm-4 col-form-label  font-text">Tên nhà xuất bản:</label>
 								<div class="col-sm-8">
 									<label class="col-form-label"><b style="color: chocolate"><i> <?= $company_orders->company_name?></i></b></label>
 								</div>
@@ -268,7 +268,7 @@
 							<div class="row">
 								<label class="col-sm-4 col-form-label  font-text">Giá:</label>
 								<div class="col-sm-8">
-									<label class="col-form-label"> <?=$books->price?></label>
+									<label class="col-form-label"> <?=number_format($books->price)?> <strong>đ</strong></label>
 								</div>
 							</div>
 						</div>
