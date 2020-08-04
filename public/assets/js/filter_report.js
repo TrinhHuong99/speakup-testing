@@ -180,6 +180,74 @@ function thong_ke_sach(){
             }
         });
     }
+     if ($('#hourly-canvas-6').length) {
+        var ctx = $('#hourly-canvas-6');
+       var sell_book_key = $('.array_date').html();
+        var bestsell_book = $('.array_date').attr('data-iteam');
+
+        sell_book_key = JSON.parse(sell_book_key);
+        bestsell_book = JSON.parse(bestsell_book);
+        window.myHorizontalBar = new Chart(ctx, {
+            type: 'horizontalBar',
+            data: {
+                labels: sell_book_key,
+                datasets: [{
+                    label: 'Sách bán chạy',
+                    backgroundColor: 'rgb(255, 132, 124)',
+                    borderColor: 'rgb(153, 184, 152)',
+                    borderWidth: 2,
+                    data: bestsell_book
+                }, 
+                // {
+                //     label: 'Số lượng KH',
+                //     backgroundColor: 'rgb(255, 159, 64)',
+                //     borderColor: 'rgb(255, 159, 64)',
+                //     data: [220,840]
+                // }
+                ]
+
+            },
+            options: {
+                elements: {
+                    rectangle: {
+                        borderWidth: 2,
+                    }
+                },
+                responsive: true,
+                legend: {
+                    position: 'right',
+                },
+                title: {
+                    display: false,
+                    text: 'Chart.js Horizontal Bar Chart'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                    enabled: false
+                },
+                animation: {
+                    onComplete: function () {
+                        var ctx = this.chart.ctx;
+                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+                        ctx.fillStyle = "#fff";
+                        this.data.datasets.forEach(function (dataset)
+                        {
+                            for (var i = 0; i < dataset.data.length; i++) {
+                                for(var key in dataset._meta)
+                                {
+                                    var model = dataset._meta[key].data[i]._model;
+                                    ctx.fillText(dataset.data[i], (model.x - 15), (model.y + 8));
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
     
     if ($('#hourly-canvas-3').length) {
         var ctx = $('#hourly-canvas-3');

@@ -46,18 +46,18 @@ class IndexController extends ControllerBase
         }
         $book_sold = count($book_sold);
       
-        $bill_sql = "SELECT DISTINCT  created_at,book_id,created_by FROM Bills 
+        $bill_sql = "SELECT DISTINCT  id,created_at,book_id,created_by FROM Bills 
                         ORDER BY created_at DESC LIMIT 0,7"; 
         $bill_date = $this->modelsManager->executeQuery($bill_sql)->toArray();
+            // echo "<pre>";
         foreach ($bill_date as $key => $value) {
             $created_at = $value['created_at'];
             $book_count = str_replace(',', '', $value['book_id']);
             $book_count = strlen($book_count);
             $bill[$created_at]['created_by'] = $value['created_by'];
+            $bill[$created_at]['id'] = $value['id'];
             $bill[$created_at]['book_count'] = $book_count;
-           
         }
-            // echo "<pre>";
             // var_dump($bill);
             // exit();
         $this->view->setVars([
