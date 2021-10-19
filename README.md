@@ -1,1 +1,4 @@
-https://drive.google.com/drive/u/1/folders/1AREq6yAFohrMS972jskDBHb4jbStqz6d
+## NPM install
+- npm install
+- npm run build
+- npm run serve
