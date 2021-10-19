@@ -1,6 +1,1 @@
-##INSTALL
-1. Clone code
-2. Chay composer de install cac thu vien doc lap
-> composer install
-3. Thêm file ht.access vào folder 
-- Thêm 1 file ht.access vào folder public nữa
+https://drive.google.com/drive/u/1/folders/1AREq6yAFohrMS972jskDBHb4jbStqz6d
